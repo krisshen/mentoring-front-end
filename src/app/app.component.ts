@@ -1,5 +1,4 @@
-import {Component, Optional} from '@angular/core';
-import {MdDialog, MdDialogRef, MdSnackBar} from '@angular/material';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +7,5 @@ import {MdDialog, MdDialogRef, MdSnackBar} from '@angular/material';
 })
 export class AppComponent {
 
-
 }
 
-@Component({
-  template: `
-    <p>This is a dialog</p>
-    <p>
-      <label>
-        This is a text box inside of a dialog.
-        <input #dialogInput>
-      </label>
-    </p>
-    <p> <button md-button (click)="dialogRef.close(dialogInput.value)">CLOSE</button> </p>
-  `,
-})
-export class DialogContent {
-  constructor(@Optional() public dialogRef: MdDialogRef<DialogContent>) { }
-}

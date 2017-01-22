@@ -2,9 +2,13 @@ import { MenteeComponent } from '../components/mentee/mentee.component'
 import { MentorComponent } from '../components/mentor/mentor.component'
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {LoginComponent} from "../components/login/login.component";
+import {MentoringComponent} from "../components/mentoring/mentoring.component";
 
 
 const routes: Routes = [
+  { path: '',  component: LoginComponent },
+  { path: 'mentoring',  component: MentoringComponent },
   { path: 'iammentor',  component: MentorComponent },
   { path: 'iammentee', component: MenteeComponent },
 ]

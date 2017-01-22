@@ -1,0 +1,19 @@
+<div *ngIf="isloggedIn">
+  <div class="app-content">
+    <md-card>
+      <md-tab-group>
+        <md-tab label="As a Mentor">
+          <mentor></mentor>
+        </md-tab>
+        <md-tab label="As a Mentee">
+          <mentee></mentee>
+        </md-tab>
+        <md-tab label="Sample">
+          <placeholder></placeholder>
+        </md-tab>
+      </md-tab-group>
+    </md-card>
+  </div>
+  <app-login></app-login>
+</div>
+<div *ngIf="!isloggedIn">Please Login First</div>
