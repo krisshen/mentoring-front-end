@@ -1,5 +1,4 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import {GoogleSignInSuccess} from 'angular-google-signin';
 import {Router} from "@angular/router";
 import {LoginService} from "../../services/login.service";
 
