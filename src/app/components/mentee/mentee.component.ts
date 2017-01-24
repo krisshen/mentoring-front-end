@@ -1,6 +1,6 @@
-import {Component, OnInit, Optional} from '@angular/core';
-import {StaffService} from "../../services/staff.service";
+import { Component, OnInit } from '@angular/core';
 import {SkillService} from "../../services/skill.service";
+import {StaffService} from "../../services/staff.service"
 import {Skill} from "../../entities/skill";
 import {Staff} from "../../entities/staff";
 
@@ -23,6 +23,7 @@ export class MenteeComponent implements OnInit{
     if (newSkill.trim()!='' && !this.currentStaff.menteeSkills.find(skill => skill.name.toLowerCase() === newSkill.trim().toLowerCase())) {
       this.currentStaff.menteeSkills.push({name: newSkill});
       this.getAllSkillsNames()
+      newSkill = ""
     }
   }
 
@@ -40,6 +41,12 @@ export class MenteeComponent implements OnInit{
 
   getCurrentStaff(): void {
     this.currentStaff = this.staffService.getStaff(1)
+  }
+
+  delete(skill: string) {
+    // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}]
+    console.log('deleting skill: ' + skill)
+    this.currentStaff.mentorSkills = this.currentStaff.menteeSkills.filter(menteeskill => menteeskill.name != skill)
   }
 
   ngOnInit(): void {

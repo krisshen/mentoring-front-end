@@ -1,8 +1,14 @@
 <br>I want to learn
-<!--<input #newSkill (keyup.enter)="addSkill(newSkill.value)" (blur)="addSkill(newSkill.value); newSkill.value='' ">-->
-<!--<button (click)=addSkill(newSkill.value)>Add</button>-->
 <md-input-container>
-  <input md-input type="search" placeholder="a skill" [(ngModel)]="newSkill.value" #newSkill (keyup.enter)="addSkill(newSkill.value); newSkill.value=''" (blur)="addSkill(newSkill.value); newSkill.value='' ">
+  <input md-input type="search" placeholder="a skill" [(ngModel)]="newSkill.value" #newSkill
+         (keyup.enter)="addSkill(newSkill.value); newSkill.value=''"
+         (blur)="addSkill(newSkill.value); newSkill.value='' ">
 </md-input-container>
-<ul><li *ngFor="let skill of currentStaff.menteeSkills">{{skill.name}}</li>{{newSkill.value}}</ul>
-
+<ul>
+  <li *ngFor="let skill of currentStaff.menteeSkills">{{skill.name}}
+    <button class="delete"
+            (click)="delete(skill.name); $event.stopPropagation()">x
+    </button>
+  </li>
+  {{newSkill.value}}
+</ul>

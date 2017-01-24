@@ -1,1 +1,10 @@
 @import '~@angular/material/core/theming/prebuilt/indigo-pink.css';
+
+html, body {
+  /* make sure the body does not have a margin */
+  margin: 0;
+  /* this forces the body tag to fill the height of the window */
+  height: 100%;
+  /* font */
+  font-family: Roboto, sans-serif;
+}
