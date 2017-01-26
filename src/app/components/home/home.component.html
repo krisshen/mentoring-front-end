@@ -1,1 +1,6 @@
-<h1 align="center">Welcome to use Mentor App</h1>
+<h1 align="center">
+
+  <div *ngIf="!isloggedIn">Please Login With Your Assurity Email Account</div>
+  <div *ngIf="isloggedIn">Welcome to use Mentoring Application</div>
+
+</h1>
