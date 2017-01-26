@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {SkillService} from "../../services/skill.service";
-import {StaffService} from "../../services/staff.service"
-import {Skill} from "../../entities/skill";
-import {Staff} from "../../entities/staff";
+import { Component, OnInit, Optional } from '@angular/core';
+import { SkillService } from '../../services/skill.service';
+import { StaffService } from '../../services/staff.service';
+import { Skill } from '../../entities/skill';
+import { Staff } from '../../entities/staff';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -12,12 +13,13 @@ import {Staff} from "../../entities/staff";
 })
 export class MentorComponent implements OnInit{
 
-  constructor(private skillService: SkillService, private staffService: StaffService) {}
+  constructor(private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {}
 
   // skills = ['Agile', 'Java', 'Automation', 'DevOps'];
   allSkills: Skill[]
   allSkillsNames = []
   currentStaff: Staff
+  lastDialogResult: string
 
   addSkill(newSkill: string) {
     if (newSkill.trim()!='' && !this.currentStaff.mentorSkills.find(skill => skill.name.toLowerCase() === newSkill.trim().toLowerCase())) {
@@ -54,4 +56,40 @@ export class MentorComponent implements OnInit{
     this.getAllSkillsNames();
     this.getCurrentStaff();
   }
+
+  openDialog() {
+    let dialogRef = this._dialog.open(MentorDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.lastDialogResult = result;
+    })
+  }
+}
+
+@Component({
+  template: `
+    <h1 md-dialog-title>Choose Your Mentee</h1>
+    <form>
+      <md-select placeholder="Mentee" [(ngModel)]="selectedValue" name="mentee">
+        <md-option *ngFor="let mentee of mentees" [value]="mentee.value">
+          {{mentee.viewValue}}
+        </md-option>
+      </md-select>
+      <p> Mentee: {{selectedValue}} </p>
+    </form>
+  `,
+})
+export class MentorDialog {
+  constructor(@Optional() public dialogRef: MdDialogRef<MentorDialog>) { }
+
+  selectedValue: string;
+
+  mentees = [
+    {value: 'Di', viewValue: 'Di Zhang'},
+    {value: 'Yang', viewValue: 'Yang Shen'},
+    {value: 'Cillin', viewValue: 'Cillin Hearns'},
+    {value: 'Daniel', viewValue: 'Daniel Kate'},
+    {value: 'Alex', viewValue: 'Alex Alexis'},
+    {value: 'Jad', viewValue: 'Jad Jeff'}
+  ];
 }

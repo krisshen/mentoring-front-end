@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import {Router} from "@angular/router";
-import {LoginService} from "../../services/login.service";
+import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 declare var gapi:any;
 
@@ -12,8 +12,8 @@ declare var gapi:any;
 export class LoginComponent {
 
   constructor(ngZone: NgZone, private router: Router, private loginService: LoginService) {
-    window['signOut'] = (user) => ngZone.run(() => this.signOut());
     window['onSignIn'] = (user) => ngZone.run(() => this.onSignIn(user));
+    window['signOut'] = (user) => ngZone.run(() => this.signOut());
   }
 
   title = 'app works!';

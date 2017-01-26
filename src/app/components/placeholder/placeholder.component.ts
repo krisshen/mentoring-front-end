@@ -1,5 +1,5 @@
-import {Component, OnInit, Optional} from '@angular/core';
-import {MdDialog, MdDialogRef, MdSnackBar} from '@angular/material';
+import { Component, OnInit, Optional } from '@angular/core';
+import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
 
 @Component({
   moduleId: module.id,

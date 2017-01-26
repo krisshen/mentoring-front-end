@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {SkillService} from "../../services/skill.service";
-import {StaffService} from "../../services/staff.service"
-import {Skill} from "../../entities/skill";
-import {Staff} from "../../entities/staff";
+import { SkillService } from '../../services/skill.service';
+import { StaffService } from '../../services/staff.service';
+import { Skill } from '../../entities/skill';
+import { Staff } from '../../entities/staff';
 
 @Component({
   moduleId: module.id,
@@ -46,7 +46,7 @@ export class MenteeComponent implements OnInit{
   delete(skill: string) {
     // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}]
     console.log('deleting skill: ' + skill)
-    this.currentStaff.mentorSkills = this.currentStaff.menteeSkills.filter(menteeskill => menteeskill.name != skill)
+    this.currentStaff.menteeSkills = this.currentStaff.menteeSkills.filter(menteeskill => menteeskill.name != skill)
   }
 
   ngOnInit(): void {

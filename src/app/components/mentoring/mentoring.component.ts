@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../../services/login.service";
-import {Router} from "@angular/router";
+import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mentoring',
@@ -19,5 +19,4 @@ export class MentoringComponent implements OnInit {
       this.router.navigate(['/'])
     }
   }
-
 }

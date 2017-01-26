@@ -12,10 +12,11 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenteeComponent } from './components/mentee/mentee.component';
-import { MentorComponent } from './components/mentor/mentor.component';
+import { MentorComponent, MentorDialog } from './components/mentor/mentor.component';
 import { MentoringComponent } from './components/mentoring/mentoring.component';
-import { PlaceHolderComponent} from './components/placeholder/placeholder.component';
+import { PlaceHolderComponent, DialogContent } from './components/placeholder/placeholder.component';
 import { LoginService} from "./services/login.service";
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { LoginService} from "./services/login.service";
     MenteeComponent,
     MentorComponent,
     MentoringComponent,
-    PlaceHolderComponent
+    PlaceHolderComponent,
+    DialogContent,
+    MentorDialog
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,11 @@ import { LoginService} from "./services/login.service";
     AppRoutingModule,
     MaterialModule.forRoot(),
     Ng2AutoCompleteModule
+  ],
+  entryComponents: [
+    PlaceHolderComponent,
+    DialogContent,
+    MentorDialog
   ],
   providers: [SkillService, StaffService, LoginService],
   bootstrap: [AppComponent]
