@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 
@@ -17,6 +17,7 @@ export class LoginComponent {
   }
 
   title = 'app works!';
+  isLoggedIn: boolean = false;
 
   public onSignIn(googleUser):void {
     var profile = googleUser.getBasicProfile();
@@ -26,14 +27,16 @@ export class LoginComponent {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());
+
     if (profile.getEmail().endsWith('assurity.co.nz')) {
-      this.router.navigate(['/mentoring'])
-      this.loginService.setLoginFlag(true)
-      this.loginService.setLoginUserID(profile.getId())
-      this.loginService.setLoginUserIDToken(id_token)
-      this.loginService.setLoginUserName(profile.getName())
-      this.loginService.setLoginUserEmail(profile.getEmail())
-      this.loginService.setLoginUserImageURL(profile.getImageUrl())
+      this.router.navigate(['/mentoring']);
+      this.loginService.setLoginFlag(true);
+      this.loginService.setLoginUserID(profile.getId());
+      this.loginService.setLoginUserIDToken(id_token);
+      this.loginService.setLoginUserName(profile.getName());
+      this.loginService.setLoginUserEmail(profile.getEmail());
+      this.loginService.setLoginUserImageURL(profile.getImageUrl());
+      this.isLoggedIn = this.loginService.isLoggedIn();
     }
   }
 
@@ -42,6 +45,7 @@ export class LoginComponent {
     auth2.signOut().then(function () {
       console.log('User signed out.');
     });
-    this.loginService.setLoginFlag(false)
+    this.loginService.setLoginFlag(false);
+    this.isLoggedIn = this.loginService.isLoggedIn();
   }
 }
