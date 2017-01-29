@@ -29,6 +29,11 @@ export class LoginComponent {
     if (profile.getEmail().endsWith('assurity.co.nz')) {
       this.router.navigate(['/mentoring'])
       this.loginService.setLoginFlag(true)
+      this.loginService.setLoginUserID(profile.getId())
+      this.loginService.setLoginUserIDToken(id_token)
+      this.loginService.setLoginUserName(profile.getName())
+      this.loginService.setLoginUserEmail(profile.getEmail())
+      this.loginService.setLoginUserImageURL(profile.getImageUrl())
     }
   }
 
