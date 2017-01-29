@@ -1,9 +1,9 @@
-import { Component, OnInit, Optional } from '@angular/core';
-import { SkillService } from '../../services/skill.service';
-import { StaffService } from '../../services/staff.service';
-import { Skill } from '../../entities/skill';
-import { Staff } from '../../entities/staff';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import {Component, OnInit, Optional} from '@angular/core';
+import {SkillService} from '../../services/skill.service';
+import {StaffService} from '../../services/staff.service';
+import {Skill} from '../../entities/skill';
+import {Staff} from '../../entities/staff';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -11,19 +11,36 @@ import { MdDialog, MdDialogRef } from '@angular/material';
   templateUrl: 'mentor.component.html',
   styleUrls: ['mentor.component.css']
 })
-export class MentorComponent implements OnInit{
+export class MentorComponent implements OnInit {
 
-  constructor(private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {}
+  constructor(private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
+  }
 
   // skills = ['Agile', 'Java', 'Automation', 'DevOps'];
+  selectedSkill: Skill
   allSkills: Skill[]
   allSkillsNames = []
   currentStaff: Staff
   lastDialogResult: string
 
-  addSkill(newSkill: string) {
-    if (newSkill.trim()!='' && !this.currentStaff.mentorSkills.find(skill => skill.name.toLowerCase() === newSkill.trim().toLowerCase())) {
-      this.currentStaff.mentorSkills.push({name: newSkill});
+  addMentorSkill(newSkill: string) {
+
+    newSkill = newSkill.trim().toLowerCase()
+
+    if (newSkill != '' && !this.currentStaff.mentorSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
+
+      //get skill info from all skills
+      this.selectedSkill = this.skillService.getSelectedSkill(newSkill)
+
+      if (this.selectedSkill == null) {
+        console.log('this skill is not in the all-skill list')
+      } else {
+        console.log('in all-skill list')
+        //and update this skill to current mentor
+        this.currentStaff.mentorSkills.push(this.selectedSkill);
+      }
+
+      //and get the latest all-skill list
       this.getAllSkillsNames()
       newSkill = ""
     }
@@ -80,7 +97,8 @@ export class MentorComponent implements OnInit{
   `,
 })
 export class MentorDialog {
-  constructor(@Optional() public dialogRef: MdDialogRef<MentorDialog>) { }
+  constructor(@Optional() public dialogRef: MdDialogRef<MentorDialog>) {
+  }
 
   selectedValue: string;
 

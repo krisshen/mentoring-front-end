@@ -1,8 +1,8 @@
 <br>I want to learn
 <md-input-container>
   <input md-input type="search" placeholder="a skill" [(ngModel)]="newSkill.value" #newSkill
-         (keyup.enter)="addSkill(newSkill.value); newSkill.value=''"
-         (blur)="addSkill(newSkill.value); newSkill.value='' ">
+         (keyup.enter)="addMenteeSkill(newSkill.value); newSkill.value=''"
+         (blur)="addMenteeSkill(newSkill.value); newSkill.value='' ">
 </md-input-container>
 <ul>
   <li *ngFor="let skill of currentStaff.menteeSkills">

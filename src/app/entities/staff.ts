@@ -2,8 +2,9 @@ import {Skill} from "./skill";
 
 export class Staff {
 
-  id: number
+  id: string
   name: string
+  email: string
   mentorSkills: Skill[]
   menteeSkills: Skill[]
 
