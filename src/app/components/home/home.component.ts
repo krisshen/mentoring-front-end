@@ -11,10 +11,12 @@ export class HomeComponent implements OnInit {
   constructor(private loginService: LoginService) {
   }
 
+  backgroundPhotoUrl: string;
   isloggedIn: boolean
 
   ngOnInit() {
-    this.isloggedIn = this.loginService.isLoggedIn()
+    this.backgroundPhotoUrl = 'https://drivenlocal.com/wp-content/uploads/2015/10/Material-design.jpg';
+    this.isloggedIn = this.loginService.isLoggedIn();
+    console.log(this.backgroundPhotoUrl)
   }
-
 }

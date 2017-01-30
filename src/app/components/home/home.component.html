@@ -1,4 +1,11 @@
-<h1 align="center">
-  <div *ngIf="!isloggedIn">Please Login With Your Assurity Email Account</div>
-  <div *ngIf="isloggedIn">Welcome to use Mentoring Application</div>
-</h1>
+<div [ngStyle]="{'background-image': 'url(' + backgroundPhotoUrl + ')', 'height': '95%'}">
+  <div id="centerBlock">
+    <h1 align="center">To be a mentor</h1>
+    <br>
+    <br>
+    <h3 align="center">OR...</h3>
+    <br>
+    <br>
+    <h1 align="center">To be a mentee</h1>
+  </div>
+</div>
