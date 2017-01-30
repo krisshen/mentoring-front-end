@@ -18,6 +18,8 @@ export class LoginComponent {
 
   title = 'app works!';
   isLoggedIn: boolean = false;
+  userName = '';
+  imgUrl = '';
 
   public onSignIn(googleUser):void {
     var profile = googleUser.getBasicProfile();
@@ -37,6 +39,8 @@ export class LoginComponent {
       this.loginService.setLoginUserEmail(profile.getEmail());
       this.loginService.setLoginUserImageURL(profile.getImageUrl());
       this.isLoggedIn = this.loginService.isLoggedIn();
+      this.userName = this.loginService.userName;
+      this.imgUrl = this.loginService.userImageURL;
     }
   }
 
