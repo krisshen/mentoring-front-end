@@ -16,9 +16,9 @@ export class SkillService {
 
   getAllSkills(): Skill[] {
     this.allskills = [
-      {id: '1', category: 'IT', name: 'test'},
-      {id: '2', category: 'IT', name: 'dev'},
-      {id: '3', category: 'IT', name: 'coach'}
+      {id: '1', category: {id: '1', name: 'IT', comment: 'this is for IT'}, name: 'test'},
+      {id: '2', category: {id: '2', name: 'IT', comment: 'this is for IT'}, name: 'dev'},
+      {id: '3', category: {id: '3', name: 'Agile', comment: 'this is for IT'}, name: 'coach'}
     ]
     return this.allskills
   }

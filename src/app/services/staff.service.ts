@@ -25,8 +25,8 @@ export class StaffService {
       id: '1',
       name: 'a Tester',
       email: 'test@gmail.com',
-      mentorSkills: [{'id': '1', 'category': 'IT', 'name': 'test'}, {'id': '2', 'category': 'IT', 'name': 'dev'}],
-      menteeSkills: [{'id': '1', 'category': 'IT', 'name': 'test'}, {'id': '2', 'category': 'IT', 'name': 'dev'}]
+      mentorSkills: [{id: '1', category: {id: '1', name: 'IT', comment: 'this is for IT'}, name: 'test'}, {id: '2', category: {id: '2', name: 'IT', comment: 'this is for IT'}, name: 'dev'}],
+      menteeSkills: [{id: '3', category: {id: '1', name: 'IT', comment: 'this is for IT'}, name: 'test'}, {id: '4', category: {id: '4', name: 'IT', comment: 'this is for IT'}, name: 'dev'}]
     }
 
     return this.currentStaff
