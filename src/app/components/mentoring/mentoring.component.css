@@ -6,3 +6,10 @@
   column-span: 1;
   row-span: 1;
 }
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
