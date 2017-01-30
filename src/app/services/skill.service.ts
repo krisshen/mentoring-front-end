@@ -13,19 +13,13 @@ export class SkillService {
   }
 
   allskills: Skill[]
-  allSkillsNames = []
 
-  //TODO: will use HTTP method
   getAllSkills(): Skill[] {
     this.allskills = [
       {id: '1', category: 'IT', name: 'test'},
       {id: '2', category: 'IT', name: 'dev'},
       {id: '3', category: 'IT', name: 'coach'}
     ]
-
-    for (let skill of this.allskills) {
-      this.allSkillsNames.push(skill.name)
-    }
     return this.allskills
   }
 
