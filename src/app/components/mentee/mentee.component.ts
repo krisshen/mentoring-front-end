@@ -17,10 +17,7 @@ export class MenteeComponent implements OnInit {
   constructor(private loginService: LoginService, private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
   }
 
-  // skills = ['Concordion', 'Cucumber', 'Selenium', 'C++', 'Scrum Master', 'ISTQB'];
   selectedSkill: Skill;
-  allSkills: Skill[];
-  allSkillsNames = [];
   currentStaff: Staff;
   lastDialogResult: string;
 
@@ -41,26 +38,13 @@ export class MenteeComponent implements OnInit {
         this.currentStaff.menteeSkills.push(this.selectedSkill);
       }
 
-      //and get the latest all-skill list
-      this.getAllSkillsNames()
       newSkill = ""
     }
   }
 
-  getAllSkillsNames(): void {
-    for (let skill of this.allSkills) {
-      // this.allSkillsNames.push(skill.name)
-      // console.log(skill.name)
-      this.allSkillsNames.push(skill.name)
-    }
-  }
-
-  getAllSkills(): void {
-    this.allSkills = this.skillService.getAllSkills()
-  }
 
   getCurrentStaff(): void {
-    this.currentStaff = this.staffService.getStaff(this.loginService.userID)
+    this.currentStaff = this.staffService.currentStaff
   }
 
   delete(skill: string) {
@@ -70,8 +54,6 @@ export class MenteeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllSkills();
-    this.getAllSkillsNames();
     this.getCurrentStaff();
   }
 
@@ -97,7 +79,8 @@ export class MenteeComponent implements OnInit {
   `,
 })
 export class MenteeDialog {
-  constructor(public dialogRef: MdDialogRef<MenteeDialog>) {}
+  constructor(public dialogRef: MdDialogRef<MenteeDialog>) {
+  }
 
   selectedMentor: string;
 

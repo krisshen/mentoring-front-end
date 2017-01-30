@@ -16,6 +16,7 @@ import { MentorComponent, MentorDialog } from './components/mentor/mentor.compon
 import { MentoringComponent } from './components/mentoring/mentoring.component';
 import { PlaceHolderComponent, DialogContent } from './components/placeholder/placeholder.component';
 import { LoginService} from "./services/login.service";
+import {HttpService} from "./services/http.service";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { LoginService} from "./services/login.service";
     PlaceHolderComponent,
     DialogContent,
   ],
-  providers: [SkillService, StaffService, LoginService],
+  providers: [SkillService, StaffService, LoginService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
