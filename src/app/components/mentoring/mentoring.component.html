@@ -1,18 +1,22 @@
-<div *ngIf="isloggedIn">
-  <div class="app-content">
-    <md-card>
-      <md-tab-group>
-        <md-tab label="As a Mentor">
-          <mentor></mentor>
-        </md-tab>
-        <md-tab label="As a Mentee">
-          <mentee></mentee>
-        </md-tab>
-        <md-tab label="Sample">
-          <placeholder></placeholder>
-        </md-tab>
-      </md-tab-group>
+<md-grid-list cols="2">
+  <md-grid-tile>
+    <md-card style="height: 60%; width: 60%">
+      <md-card-title align="center">
+        As a Mentor
+      </md-card-title>
+      <md-card-content>
+        <mentor></mentor>
+      </md-card-content>
     </md-card>
-  </div>
-</div>
-<div *ngIf="!isloggedIn">Please Login First</div>
+  </md-grid-tile>
+  <md-grid-tile>
+    <md-card style="height: 60%; width: 60%">
+      <md-card-title align="center">
+        As a Mentee
+      </md-card-title>
+      <md-card-content>
+        <mentee></mentee>
+      </md-card-content>
+    </md-card>
+  </md-grid-tile>
+</md-grid-list>

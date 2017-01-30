@@ -11,10 +11,10 @@ export class MentoringComponent implements OnInit {
 
   constructor(private router: Router, private loginService: LoginService) { }
 
-  isloggedIn: boolean
+  isloggedIn: boolean;
 
   ngOnInit() {
-    this.isloggedIn = this.loginService.isLoggedIn()
+    this.isloggedIn = this.loginService.isLoggedIn();
     if(!this.isloggedIn) {
       this.router.navigate(['/'])
     }

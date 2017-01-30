@@ -1,0 +1,8 @@
+.md-grid-list {
+  flex-grow: 1;
+}
+
+.md-grid-title {
+  column-span: 1;
+  row-span: 1;
+}
