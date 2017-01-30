@@ -18,31 +18,31 @@ export class MentorComponent implements OnInit {
   }
 
   // skills = ['Agile', 'Java', 'Automation', 'DevOps'];
-  selectedSkill: Skill
-  allSkills: Skill[]
-  allSkillsNames = []
-  currentStaff: Staff
-  lastDialogResult: string
+  selectedSkill: Skill;
+  allSkills: Skill[];
+  allSkillsNames = [];
+  currentStaff: Staff;
+  lastDialogResult: string;
 
   addMentorSkill(newSkill: string) {
 
-    newSkill = newSkill.trim().toLowerCase()
+    newSkill = newSkill.trim().toLowerCase();
 
     if (newSkill != '' && !this.currentStaff.mentorSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
 
       //get skill info from all skills
-      this.selectedSkill = this.skillService.getSelectedSkill(newSkill)
+      this.selectedSkill = this.skillService.getSelectedSkill(newSkill);
 
       if (this.selectedSkill == null) {
         console.log('this skill is not in the all-skill list')
       } else {
-        console.log('in all-skill list')
+        console.log('in all-skill list');
         //and update this skill to current mentor
         this.currentStaff.mentorSkills.push(this.selectedSkill);
       }
 
       //and get the latest all-skill list
-      this.getAllSkillsNames()
+      this.getAllSkillsNames();
       newSkill = ""
     }
   }
@@ -86,7 +86,7 @@ export class MentorComponent implements OnInit {
 
 @Component({
   template: `
-    <h1 md-dialog-title>Choose Your Mentee</h1>
+    <h1 md-dialog-title>Overview of the mentee</h1>
     <form>
       <md-select placeholder="Mentee" [(ngModel)]="selectedValue" name="mentee">
         <md-option *ngFor="let mentee of mentees" [value]="mentee.value">

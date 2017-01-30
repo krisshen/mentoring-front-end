@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Optional} from '@angular/core';
 import {SkillService} from '../../services/skill.service';
 import {StaffService} from '../../services/staff.service';
 import {Skill} from '../../entities/skill';
 import {Staff} from '../../entities/staff';
 import {LoginService} from "../../services/login.service";
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -13,14 +14,15 @@ import {LoginService} from "../../services/login.service";
 })
 export class MenteeComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private skillService: SkillService, private staffService: StaffService) {
+  constructor(private loginService: LoginService, private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
   }
 
   // skills = ['Concordion', 'Cucumber', 'Selenium', 'C++', 'Scrum Master', 'ISTQB'];
-  selectedSkill: Skill
-  allSkills: Skill[]
-  allSkillsNames = []
-  currentStaff: Staff
+  selectedSkill: Skill;
+  allSkills: Skill[];
+  allSkillsNames = [];
+  currentStaff: Staff;
+  lastDialogResult: string;
 
   addMenteeSkill(newSkill: string) {
 
@@ -63,7 +65,7 @@ export class MenteeComponent implements OnInit {
 
   delete(skill: string) {
     // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}]
-    console.log('deleting skill: ' + skill)
+    console.log('deleting skill: ' + skill);
     this.currentStaff.menteeSkills = this.currentStaff.menteeSkills.filter(menteeskill => menteeskill.name != skill)
   }
 
@@ -72,5 +74,39 @@ export class MenteeComponent implements OnInit {
     this.getAllSkillsNames();
     this.getCurrentStaff();
   }
+
+  openDialog() {
+    let dialogRef = this._dialog.open(MenteeDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.lastDialogResult = result;
+    })
+  }
 }
 
+@Component({
+  template: `
+    <h1 md-dialog-title>Select Your Mentor</h1>
+    <md-select placeholder="Mentor" [(ngModel)]="selectedMentor" name="mentor">
+      <md-option *ngFor="let mentor of mentors" [value]="mentor.value">
+       {{mentor.viewValue}}
+      </md-option>
+    </md-select>
+    <p> Mentor: {{selectedMentor}} </p>
+    <button md-mini-fab (click)="dialogRef.close(selectedMentor)"><md-icon>check</md-icon></button>
+  `,
+})
+export class MenteeDialog {
+  constructor(public dialogRef: MdDialogRef<MenteeDialog>) {}
+
+  selectedMentor: string;
+
+  mentors = [
+    {value: 'Di', viewValue: 'Di Zhang'},
+    {value: 'Yang', viewValue: 'Yang Shen'},
+    {value: 'Cillin', viewValue: 'Cillin Hearns'},
+    {value: 'Daniel', viewValue: 'Daniel Kate'},
+    {value: 'Alex', viewValue: 'Alex Alexis'},
+    {value: 'Jad', viewValue: 'Jad Jeff'}
+  ];
+}

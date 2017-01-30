@@ -14,7 +14,7 @@ export class StaffService {
 
   constructor(private http: Http) { }
 
-  getStaff(id: number): Staff {
+  getStaff(id: string): Staff {
 
     //return {id: 1, name: "kris", mentorSkills: [{name: 'Swimming'}, {name: 'Driving'}], menteeSkills: [{name: 'Cooking'}, {name: 'Fishing'}, {name: 'Hiking'}]}
      this.staff = {
