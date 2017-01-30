@@ -1,6 +1,7 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import {SkillService} from '../../services/skill.service';
 import {StaffService} from '../../services/staff.service';
+import {LoginService} from '../../services/login.service';
 import {Skill} from '../../entities/skill';
 import {Staff} from '../../entities/staff';
 import {MdDialog, MdDialogRef} from '@angular/material';
@@ -13,7 +14,7 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 })
 export class MentorComponent implements OnInit {
 
-  constructor(private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
+  constructor(private loginService: LoginService, private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
   }
 
   // skills = ['Agile', 'Java', 'Automation', 'DevOps'];
@@ -59,7 +60,7 @@ export class MentorComponent implements OnInit {
   }
 
   getCurrentStaff(): void {
-    this.currentStaff = this.staffService.getStaff(1)
+    this.currentStaff = this.staffService.getStaff(this.loginService.userID)
   }
 
   delete(skill: string) {
