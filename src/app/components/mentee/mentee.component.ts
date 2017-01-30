@@ -15,6 +15,7 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 export class MenteeComponent implements OnInit {
 
   constructor(private loginService: LoginService, private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
+    console.log('initializing mentee constructor')
   }
 
   // skills = ['Concordion', 'Cucumber', 'Selenium', 'C++', 'Scrum Master', 'ISTQB'];
@@ -60,7 +61,9 @@ export class MenteeComponent implements OnInit {
   }
 
   getCurrentStaff(): void {
-    this.currentStaff = this.staffService.getStaff(this.loginService.userID)
+    console.log('mentee.getCurrentStaff')
+    // this.currentStaff = this.staffService.getStaff(this.loginService.userID)
+    this.currentStaff = this.staffService.currentStaff
   }
 
   delete(skill: string) {

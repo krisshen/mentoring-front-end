@@ -15,6 +15,7 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 export class MentorComponent implements OnInit {
 
   constructor(private loginService: LoginService, private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
+    console.log('initializing mentor constructor')
   }
 
   // skills = ['Agile', 'Java', 'Automation', 'DevOps'];
@@ -60,7 +61,9 @@ export class MentorComponent implements OnInit {
   }
 
   getCurrentStaff(): void {
-    this.currentStaff = this.staffService.getStaff(this.loginService.userID)
+    console.log('mentor.getCurrentStaff')
+    // this.currentStaff = this.staffService.getStaff(this.loginService.userID)
+    this.currentStaff = this.staffService.currentStaff
   }
 
   delete(skill: string) {

@@ -10,8 +10,8 @@ import { MentoringComponent } from '../components/mentoring/mentoring.component'
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'mentoring', component: MentoringComponent },
-  { path: 'iammentor', component: MentorComponent },
-  { path: 'iammentee', component: MenteeComponent },
+  // { path: 'iammentor', component: MentorComponent },
+  // { path: 'iammentee', component: MenteeComponent },
 ];
 
 @NgModule({
