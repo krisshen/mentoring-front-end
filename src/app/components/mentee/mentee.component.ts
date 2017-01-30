@@ -3,6 +3,7 @@ import {SkillService} from '../../services/skill.service';
 import {StaffService} from '../../services/staff.service';
 import {Skill} from '../../entities/skill';
 import {Staff} from '../../entities/staff';
+import {LoginService} from "../../services/login.service";
 
 @Component({
   moduleId: module.id,
@@ -12,7 +13,7 @@ import {Staff} from '../../entities/staff';
 })
 export class MenteeComponent implements OnInit {
 
-  constructor(private skillService: SkillService, private staffService: StaffService) {
+  constructor(private loginService: LoginService, private skillService: SkillService, private staffService: StaffService) {
   }
 
   // skills = ['Concordion', 'Cucumber', 'Selenium', 'C++', 'Scrum Master', 'ISTQB'];
@@ -57,7 +58,7 @@ export class MenteeComponent implements OnInit {
   }
 
   getCurrentStaff(): void {
-    this.currentStaff = this.staffService.getStaff(1)
+    this.currentStaff = this.staffService.getStaff(this.loginService.userID)
   }
 
   delete(skill: string) {
