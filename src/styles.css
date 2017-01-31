@@ -6,5 +6,5 @@ html, body {
   /* this forces the body tag to fill the height of the window */
   height: 100%;
   /* font */
-  font-family: Roboto, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
