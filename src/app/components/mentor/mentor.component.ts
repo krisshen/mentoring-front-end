@@ -24,6 +24,7 @@ export class MentorComponent implements OnInit {
   allSkillsNames = [];
   currentStaff: Staff;
   lastDialogResult: string;
+  mentorSkills: Skill[]
 
   addMentorSkill(newSkill: string) {
 
@@ -63,13 +64,18 @@ export class MentorComponent implements OnInit {
   getCurrentStaff(): void {
     console.log('mentor.getCurrentStaff')
     // this.currentStaff = this.staffService.getStaff(this.loginService.userID)
-    this.currentStaff = this.staffService.currentStaff
+    // this.currentStaff = this.staffService.currentStaff
+    this.staffService.getStaff('123').subscribe(
+      data => this.mentorSkills = data.mentorSkills,
+      error => alert(error),
+      () => console.log('Get Request Complete!')
+    )
   }
 
   delete(skill: string) {
     // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}]
     console.log('deleting skill: ' + skill)
-    this.currentStaff.mentorSkills = this.currentStaff.mentorSkills.filter(mentorskill => mentorskill.name != skill)
+    this.mentorSkills = this.mentorSkills.filter(mentorskill => mentorskill.name != skill)
   }
 
   ngOnInit(): void {

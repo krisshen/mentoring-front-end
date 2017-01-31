@@ -5,7 +5,7 @@
          (blur)="addMentorSkill(newSkill.value); newSkill.value='' ">
 </md-input-container>
 <ul>
-  <li *ngFor="let skill of currentStaff.mentorSkills">
+  <li *ngFor="let skill of mentorSkills">
     <button md-button (click)="openDialog()">{{skill.name}}</button>
     <button class="delete"
             (click)="delete(skill.name); $event.stopPropagation()">x

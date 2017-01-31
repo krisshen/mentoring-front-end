@@ -8,4 +8,11 @@ export class Staff {
   mentorSkills: Skill[]
   menteeSkills: Skill[]
 
+  constructor(jsonData: any) {
+    this.id = jsonData.id
+    this.name = jsonData.name
+    this.email = jsonData.email
+    this.mentorSkills = jsonData.mentorSkills
+    this.menteeSkills = jsonData.menteeSkills
+  }
 }

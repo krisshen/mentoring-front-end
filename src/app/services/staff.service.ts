@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
-
 import 'rxjs/add/operator/toPromise';
 import {Staff} from "../entities/staff";
-import {Skill} from "../entities/skill";
 import {HttpService} from "./http.service";
+import {Http} from "@angular/http";
+import {Observable} from "rxjs";
 
 
 
@@ -16,20 +15,36 @@ export class StaffService {
 
   currentStaff: Staff
 
-  constructor(private httpService: HttpService) { }
+  constructor(private http: Http) { }
 
-  getStaff(id: string): Staff {
+  getStaff(id: string): Observable<any> {
 
-    //return {id: 1, name: "kris", mentorSkills: [{name: 'Swimming'}, {name: 'Driving'}], menteeSkills: [{name: 'Cooking'}, {name: 'Fishing'}, {name: 'Hiking'}]}
-     this.currentStaff = {
-      id: '1',
-      name: 'a Tester',
-      email: 'test@gmail.com',
-      mentorSkills: [{id: '1', category: {id: '1', name: 'IT', comment: 'this is for IT'}, name: 'test'}, {id: '2', category: {id: '2', name: 'IT', comment: 'this is for IT'}, name: 'dev'}],
-      menteeSkills: [{id: '3', category: {id: '1', name: 'IT', comment: 'this is for IT'}, name: 'test'}, {id: '4', category: {id: '4', name: 'IT', comment: 'this is for IT'}, name: 'dev'}]
-    }
+    console.log('StaffService.getStaff ...')
+    //  this.currentStaff = {
+    //   id: '1',
+    //   name: 'a Tester',
+    //   email: 'test@gmail.com',
+    //   mentorSkills: [{id: '1', category: {id: '1', name: 'IT', comment: 'this is for IT'}, name: 'test'}, {id: '2', category: {id: '2', name: 'IT', comment: 'this is for IT'}, name: 'dev'}],
+    //   menteeSkills: [{id: '3', category: {id: '1', name: 'IT', comment: 'this is for IT'}, name: 'test'}, {id: '4', category: {id: '4', name: 'IT', comment: 'this is for IT'}, name: 'dev'}]
+    // }
 
-    return this.currentStaff
+    // this.httpService.get(this.staffUrl)
+    //   .subscribe(
+    //     data => this.currentStaff = data,
+    //     error => alert(error),
+    //     () => console.log('Get Request Done')
+    //   )
+    // console.log(this.currentStaff.name)
+
+    // this.httpService.getStaff(this.staffUrl,'1').then(staff => this.currentStaff = staff)
+
+    // console.log(this.currentStaff)
+
+
+    return this.http.get(this.staffUrl)
+      .map(res => res.json())
+
+    // return this.currentStaff
 
   }
 

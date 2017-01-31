@@ -24,7 +24,7 @@ export class MentoringComponent implements OnInit {
     }
     else {
       console.log('mentoring.OnInit... user logged in')
-      this.staffService.getStaff('asd')
+      // this.staffService.getStaff('asd')
     }
   }
 }
