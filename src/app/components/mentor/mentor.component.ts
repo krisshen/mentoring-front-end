@@ -7,7 +7,6 @@ import {Staff} from '../../entities/staff';
 import {MdDialog, MdDialogRef} from '@angular/material';
 
 @Component({
-  moduleId: module.id,
   selector: 'mentor',
   templateUrl: 'mentor.component.html',
   styleUrls: ['mentor.component.css']
@@ -87,21 +86,14 @@ export class MentorComponent implements OnInit {
 @Component({
   template: `
     <h1 md-dialog-title>Overview of the mentee</h1>
-    <form>
-      <md-select placeholder="Mentee" [(ngModel)]="selectedValue" name="mentee">
-        <md-option *ngFor="let mentee of mentees" [value]="mentee.value">
-          {{mentee.viewValue}}
-        </md-option>
-      </md-select>
-      <p> Mentee: {{selectedValue}} </p>
-    </form>
+    <md-list *ngFor="let mentee of mentees" dense>
+      <md-list-item>{{mentee.viewValue}}</md-list-item>
+    </md-list>
   `,
 })
 export class MentorDialog {
   constructor(@Optional() public dialogRef: MdDialogRef<MentorDialog>) {
   }
-
-  selectedValue: string;
 
   mentees = [
     {value: 'Di', viewValue: 'Di Zhang'},

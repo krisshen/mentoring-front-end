@@ -17,6 +17,5 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.backgroundPhotoUrl = 'https://drivenlocal.com/wp-content/uploads/2015/10/Material-design.jpg';
     this.isloggedIn = this.loginService.isLoggedIn();
-    console.log(this.backgroundPhotoUrl)
   }
 }
