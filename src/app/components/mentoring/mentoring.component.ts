@@ -16,6 +16,7 @@ export class MentoringComponent implements OnInit {
   }
 
   isloggedIn: boolean
+  staffID: string
 
   ngOnInit() {
     this.isloggedIn = this.loginService.isLoggedIn();
@@ -25,7 +26,9 @@ export class MentoringComponent implements OnInit {
     }
     else {
       console.log('mentoring.OnInit... user logged in')
-      this.staffService.getStaff('asd')
+      this.staffID = this.loginService.userName.replace(' ', '').toLowerCase().trim()
+      console.log('mentoring.OnInit... staff ID is: ' + this.staffID)
+      this.staffService.getStaff(this.staffID)
         .subscribe(
           data => this.staffService.currentStaff = data,
           error => alert(error),

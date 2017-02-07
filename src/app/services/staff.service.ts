@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
 export class StaffService {
 
   private allStaffsUrl = 'staffs'
-  private staffUrl = 'http://localhost:8080/staff/123'
+  private staffUrl = 'http://localhost:8080/staff/'
 
   currentStaff: Staff
   isStaffLoaded: boolean
@@ -42,7 +42,7 @@ export class StaffService {
     // console.log(this.currentStaff)
 
 
-    return this.http.get(this.staffUrl)
+    return this.http.get(this.staffUrl + id)
       .map(res => res.json())
 
     // return this.currentStaff
