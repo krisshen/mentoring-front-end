@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../services/login.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {LoginService} from '../../services/login.service';
+import {Router} from '@angular/router';
 import {StaffService} from "../../services/staff.service";
+import {Staff} from "../../entities/staff";
 
 @Component({
   selector: 'mentoring',
@@ -14,17 +15,23 @@ export class MentoringComponent implements OnInit {
     console.log('initializing mentoring constructor')
   }
 
-  isloggedIn: boolean;
+  isloggedIn: boolean
 
   ngOnInit() {
     this.isloggedIn = this.loginService.isLoggedIn();
-    if(!this.isloggedIn) {
+    if (!this.isloggedIn) {
       console.log('mentoring.OnInit... user not logged in')
       this.router.navigate(['/'])
     }
     else {
       console.log('mentoring.OnInit... user logged in')
-      // this.staffService.getStaff('asd')
+      this.staffService.getStaff('asd')
+        .subscribe(
+          data => this.staffService.currentStaff = data,
+          error => alert(error),
+          () => (this.staffService.isStaffLoaded = true,
+                 console.log('Get Request Complete!'))
+        )
     }
   }
 }

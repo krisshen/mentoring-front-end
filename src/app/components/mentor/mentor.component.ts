@@ -22,15 +22,13 @@ export class MentorComponent implements OnInit {
   selectedSkill: Skill;
   allSkills: Skill[];
   allSkillsNames = [];
-  currentStaff: Staff;
   lastDialogResult: string;
-  mentorSkills: Skill[]
 
   addMentorSkill(newSkill: string) {
 
     newSkill = newSkill.trim().toLowerCase();
 
-    if (newSkill != '' && !this.currentStaff.mentorSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
+    if (newSkill != '' && !this.staffService.currentStaff.mentorSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
 
       //get skill info from all skills
       this.selectedSkill = this.skillService.getSelectedSkill(newSkill);
@@ -40,7 +38,7 @@ export class MentorComponent implements OnInit {
       } else {
         console.log('in all-skill list');
         //and update this skill to current mentor
-        this.currentStaff.mentorSkills.push(this.selectedSkill);
+        this.staffService.currentStaff.mentorSkills.push(this.selectedSkill);
       }
 
       //and get the latest all-skill list
@@ -61,27 +59,20 @@ export class MentorComponent implements OnInit {
     this.allSkills = this.skillService.getAllSkills()
   }
 
-  getCurrentStaff(): void {
-    console.log('mentor.getCurrentStaff')
-    // this.currentStaff = this.staffService.getStaff(this.loginService.userID)
-    // this.currentStaff = this.staffService.currentStaff
-    this.staffService.getStaff('123').subscribe(
-      data => this.mentorSkills = data.mentorSkills,
-      error => alert(error),
-      () => console.log('Get Request Complete!')
-    )
+  getCurrentStaff(): Staff {
+    return this.staffService.currentStaff
   }
 
   delete(skill: string) {
     // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}]
     console.log('deleting skill: ' + skill)
-    this.mentorSkills = this.mentorSkills.filter(mentorskill => mentorskill.name != skill)
+    this.staffService.currentStaff.mentorSkills = this.staffService.currentStaff.mentorSkills.filter(mentorskill => mentorskill.name != skill)
   }
 
   ngOnInit(): void {
     this.getAllSkills();
     this.getAllSkillsNames();
-    this.getCurrentStaff();
+    // this.getCurrentStaff();
   }
 
   openDialog() {

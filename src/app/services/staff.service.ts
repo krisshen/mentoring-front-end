@@ -14,6 +14,7 @@ export class StaffService {
   private staffUrl = 'http://localhost:8080/staff/123'
 
   currentStaff: Staff
+  isStaffLoaded: boolean
 
   constructor(private http: Http) { }
 

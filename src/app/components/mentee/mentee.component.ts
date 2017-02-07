@@ -22,14 +22,13 @@ export class MenteeComponent implements OnInit {
   selectedSkill: Skill;
   allSkills: Skill[];
   allSkillsNames = [];
-  currentStaff: Staff;
   lastDialogResult: string;
 
   addMenteeSkill(newSkill: string) {
 
     newSkill = newSkill.trim().toLowerCase()
 
-    if (newSkill != '' && !this.currentStaff.menteeSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
+    if (newSkill != '' && !this.staffService.currentStaff.menteeSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
 
       //get skill info from all skills
       this.selectedSkill = this.skillService.getSelectedSkill(newSkill)
@@ -39,7 +38,7 @@ export class MenteeComponent implements OnInit {
       } else {
         console.log('in all-skill list')
         //and update this skill to current mentor
-        this.currentStaff.menteeSkills.push(this.selectedSkill);
+        this.staffService.currentStaff.menteeSkills.push(this.selectedSkill);
       }
 
       //and get the latest all-skill list
@@ -60,22 +59,19 @@ export class MenteeComponent implements OnInit {
     this.allSkills = this.skillService.getAllSkills()
   }
 
-  getCurrentStaff(): void {
-    console.log('mentee.getCurrentStaff')
-    // this.currentStaff = this.staffService.getStaff(this.loginService.userID)
-    this.currentStaff = this.staffService.currentStaff
+  getCurrentStaff(): Staff {
+    return this.staffService.currentStaff
   }
 
   delete(skill: string) {
     // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}]
     console.log('deleting skill: ' + skill);
-    this.currentStaff.menteeSkills = this.currentStaff.menteeSkills.filter(menteeskill => menteeskill.name != skill)
+    this.staffService.currentStaff.menteeSkills = this.staffService.currentStaff.menteeSkills.filter(menteeskill => menteeskill.name != skill)
   }
 
   ngOnInit(): void {
     this.getAllSkills();
     this.getAllSkillsNames();
-    this.getCurrentStaff();
   }
 
   openDialog() {

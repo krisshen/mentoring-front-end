@@ -4,8 +4,9 @@
          (keyup.enter)="addMentorSkill(newSkill.value); newSkill.value=''"
          (blur)="addMentorSkill(newSkill.value); newSkill.value='' ">
 </md-input-container>
+<div *ngIf="staffService.isStaffLoaded">
 <ul>
-  <li *ngFor="let skill of mentorSkills">
+  <li *ngFor="let skill of getCurrentStaff().mentorSkills">
     <button md-button (click)="openDialog()">{{skill.name}}</button>
     <button class="delete"
             (click)="delete(skill.name); $event.stopPropagation()">x
@@ -13,3 +14,5 @@
   </li>
   {{newSkill.value}}
 </ul>
+</div>
+<div *ngIf="!staffService.isStaffLoaded"><md-spinner></md-spinner></div>
