@@ -53,6 +53,9 @@ export class LoginComponent {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());
 
+    if (profile.getName() == 'Kris Shen') {
+      this.loginService.setAdminFlag(true);
+    }
     this.loginService.setLoginFlag(true);
     this.loginService.setLoginUserID(profile.getId());
     this.loginService.setLoginUserIDToken(id_token);

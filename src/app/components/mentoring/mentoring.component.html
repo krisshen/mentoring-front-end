@@ -1,3 +1,8 @@
+<br>
+<div *ngIf="isAdmin">
+  <button md-raised-button color="primary" (click)="gotoAdmin()">ADMIN</button>
+</div>
+
 <md-grid-list cols="2">
   <md-grid-tile>
     <md-card style="height: 60%; width: 60%">

@@ -16,10 +16,12 @@ export class MentoringComponent implements OnInit {
   }
 
   isloggedIn: boolean
+  isAdmin: boolean
   staffID: string
 
   ngOnInit() {
-    this.isloggedIn = this.loginService.isLoggedIn();
+    this.isloggedIn = this.loginService.isLoggedIn()
+    this.isAdmin = this.loginService.isAdmin()
     if (!this.isloggedIn) {
       console.log('mentoring.OnInit... user not logged in')
       this.router.navigate(['/'])
@@ -37,5 +39,9 @@ export class MentoringComponent implements OnInit {
         )
 
     }
+  }
+
+  gotoAdmin() {
+    this.router.navigate(['/admin']);
   }
 }

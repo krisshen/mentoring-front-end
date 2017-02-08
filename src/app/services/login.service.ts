@@ -5,12 +5,21 @@ export class LoginService {
 
   constructor() {}
 
+  adminFlag = false
   loginFlag = false
   userID: string
   userIDToken: string
   userName: string
   userEmail: string
   userImageURL: string
+
+  setAdminFlag(flag: boolean) {
+    this.adminFlag = flag
+  }
+
+  isAdmin(): boolean {
+    return this.adminFlag
+  }
 
   setLoginFlag(flag: boolean) {
     this.loginFlag = flag

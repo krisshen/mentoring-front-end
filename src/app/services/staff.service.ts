@@ -50,7 +50,7 @@ export class StaffService {
 
   }
 
-  getMenteeList(staffID: string, skillID: string): string[] {
+  getMenteeList(staffID: string, skillID: string): Observable<any[]> {
     return this.http.get(this.menteeListUrl + staffID + '/' + skillID)
       .map(res => res.json())
   }

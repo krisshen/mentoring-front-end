@@ -17,6 +17,7 @@ import { MentoringComponent } from './components/mentoring/mentoring.component';
 import { PlaceHolderComponent, DialogContent } from './components/placeholder/placeholder.component';
 import { LoginService} from "./services/login.service";
 import { HttpService } from "./services/http.service";
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HttpService } from "./services/http.service";
     MentorDialog,
     MentoringComponent,
     PlaceHolderComponent,
-    DialogContent
+    DialogContent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
