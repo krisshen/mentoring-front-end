@@ -12,6 +12,7 @@ export class StaffService {
 
   private allStaffsUrl = 'staffs'
   private staffUrl = 'http://localhost:8080/staff/'
+  private menteeListUrl = 'http://localhost:8080/menteeList/'
 
   currentStaff: Staff
   isStaffLoaded: boolean
@@ -47,6 +48,11 @@ export class StaffService {
 
     // return this.currentStaff
 
+  }
+
+  getMenteeList(staffID: string, skillID: string): string[] {
+    return this.http.get(this.menteeListUrl + staffID + '/' + skillID)
+      .map(res => res.json())
   }
 
   // updateStaff(staff: Staff): Promise<Staff> {
