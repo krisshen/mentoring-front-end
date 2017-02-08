@@ -13,6 +13,17 @@ export class SkillService {
   }
 
   allskills: Skill[]
+  defaultAllSkills: string[] = [
+    'Apple',
+    'Agile',
+    'Automation',
+    'Java',
+    'Groovy',
+    'HP ALM',
+    'HP UFT',
+    'Oracle SQL',
+    'DevOps'
+  ];
 
   getAllSkills(): Skill[] {
     this.allskills = [

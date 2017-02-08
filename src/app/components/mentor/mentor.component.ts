@@ -17,12 +17,11 @@ export class MentorComponent implements OnInit {
     console.log('initializing mentor constructor')
   }
 
-  // skills = ['Agile', 'Java', 'Automation', 'DevOps'];
   selectedSkill: Skill;
   allSkills: Skill[];
   allSkillsNames = [];
   lastDialogResult: string;
-
+  
   addMentorSkill(newSkill: string) {
 
     newSkill = newSkill.trim().toLowerCase();

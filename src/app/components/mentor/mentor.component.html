@@ -1,8 +1,14 @@
 <br>I can teach
 <md-input-container>
-  <input md-input type="search" placeholder="a skill" [(ngModel)]="newSkill.value" #newSkill
+  <input md-input
+         ng2-auto-complete
+         type="search"
+         placeholder="a skill"
+         [(ngModel)]="newSkill.value"
+         [source]="skillService.defaultAllSkills"
          (keyup.enter)="addMentorSkill(newSkill.value); newSkill.value=''"
-         (blur)="addMentorSkill(newSkill.value); newSkill.value='' ">
+         (blur)="addMentorSkill(newSkill.value); newSkill.value='' "
+         #newSkill>
 </md-input-container>
 <div *ngIf="staffService.isStaffLoaded">
 <ul>
