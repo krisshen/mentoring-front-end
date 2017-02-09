@@ -13,9 +13,9 @@
 <div *ngIf="staffService.isStaffLoaded">
 <ul>
   <li *ngFor="let skill of getCurrentStaff().mentorSkills">
-    <button md-button (click)="openDialog()">{{skill.name}}</button>
+    <button md-button (click)="openDialog()" style="text-align: left">{{skill}}</button>
     <button class="delete"
-            (click)="delete(skill.name); $event.stopPropagation()">x
+            (click)="delete(skill); $event.stopPropagation()">x
     </button>
   </li>
   {{newSkill.value}}

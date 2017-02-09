@@ -21,28 +21,28 @@ export class MentorComponent implements OnInit {
   allSkills: Skill[];
   allSkillsNames = [];
   lastDialogResult: string;
-  
+
   addMentorSkill(newSkill: string) {
 
-    newSkill = newSkill.trim().toLowerCase();
-
-    if (newSkill != '' && !this.staffService.currentStaff.mentorSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
-
-      //get skill info from all skills
-      this.selectedSkill = this.skillService.getSelectedSkill(newSkill);
-
-      if (this.selectedSkill == null) {
-        console.log('this skill is not in the all-skill list')
-      } else {
-        console.log('in all-skill list');
-        //and update this skill to current mentor
-        this.staffService.currentStaff.mentorSkills.push(this.selectedSkill);
-      }
-
-      //and get the latest all-skill list
-      this.getAllSkillsNames();
-      newSkill = ""
-    }
+    // newSkill = newSkill.trim().toLowerCase();
+    //
+    // if (newSkill != '' && !this.staffService.currentStaff.mentorSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
+    //
+    //   //get skill info from all skills
+    //   this.selectedSkill = this.skillService.getSelectedSkill(newSkill);
+    //
+    //   if (this.selectedSkill == null) {
+    //     console.log('this skill is not in the all-skill list')
+    //   } else {
+    //     console.log('in all-skill list');
+    //     //and update this skill to current mentor
+    //     this.staffService.currentStaff.mentorSkills.push(this.selectedSkill);
+    //   }
+    //
+    //   //and get the latest all-skill list
+    //   this.getAllSkillsNames();
+    //   newSkill = ""
+    // }
   }
 
   getAllSkillsNames(): void {
@@ -62,9 +62,9 @@ export class MentorComponent implements OnInit {
   }
 
   delete(skill: string) {
-    // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}]
-    console.log('deleting skill: ' + skill)
-    this.staffService.currentStaff.mentorSkills = this.staffService.currentStaff.mentorSkills.filter(mentorskill => mentorskill.name != skill)
+    // // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}
+    console.log('deleting skill: ' + skill);
+    this.staffService.currentStaff.mentorSkills = this.staffService.currentStaff.mentorSkills.filter(mentorskill => mentorskill != skill)
   }
 
   ngOnInit(): void {

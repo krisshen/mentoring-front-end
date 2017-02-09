@@ -26,25 +26,25 @@ export class MenteeComponent implements OnInit {
 
   addMenteeSkill(newSkill: string) {
 
-    newSkill = newSkill.trim().toLowerCase()
-
-    if (newSkill != '' && !this.staffService.currentStaff.menteeSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
-
-      //get skill info from all skills
-      this.selectedSkill = this.skillService.getSelectedSkill(newSkill)
-
-      if (this.selectedSkill == null) {
-        console.log('this skill is not in the all-skill list')
-      } else {
-        console.log('in all-skill list')
-        //and update this skill to current mentor
-        this.staffService.currentStaff.menteeSkills.push(this.selectedSkill);
-      }
-
-      //and get the latest all-skill list
-      this.getAllSkillsNames()
-      newSkill = ""
-    }
+    // newSkill = newSkill.trim().toLowerCase()
+    //
+    // if (newSkill != '' && !this.staffService.currentStaff.menteeSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
+    //
+    //   //get skill info from all skills
+    //   this.selectedSkill = this.skillService.getSelectedSkill(newSkill)
+    //
+    //   if (this.selectedSkill == null) {
+    //     console.log('this skill is not in the all-skill list')
+    //   } else {
+    //     console.log('in all-skill list')
+    //     //and update this skill to current mentor
+    //     this.staffService.currentStaff.menteeSkills.push(this.selectedSkill);
+    //   }
+    //
+    //   //and get the latest all-skill list
+    //   this.getAllSkillsNames()
+    //   newSkill = ""
+    // }
   }
 
   getAllSkillsNames(): void {
@@ -64,9 +64,9 @@ export class MenteeComponent implements OnInit {
   }
 
   delete(skill: string) {
-    // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}]
+    // // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}]
     console.log('deleting skill: ' + skill);
-    this.staffService.currentStaff.menteeSkills = this.staffService.currentStaff.menteeSkills.filter(menteeskill => menteeskill.name != skill)
+    this.staffService.currentStaff.menteeSkills = this.staffService.currentStaff.menteeSkills.filter(menteeskill => menteeskill != skill)
   }
 
   ngOnInit(): void {
