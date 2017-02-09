@@ -31,6 +31,6 @@ export class SkillService {
   }
 
   getSelectedSkill(skillName: string): Skill {
-    return this.allSkills.find(skill => skill == skillName)
+    return this.allSkills.find(skill => skill.name == skillName)
   }
 }
