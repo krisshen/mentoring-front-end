@@ -1,10 +1,13 @@
-import {Component, OnInit, Optional} from '@angular/core';
-import {SkillService} from '../../services/skill.service';
-import {StaffService} from '../../services/staff.service';
-import {LoginService} from '../../services/login.service';
-import {Skill} from '../../entities/skill';
-import {Staff} from '../../entities/staff';
-import {MdDialog, MdDialogRef} from '@angular/material';
+import { Component, OnInit, Optional } from '@angular/core';
+import { MdDialog, MdDialogRef } from '@angular/material';
+
+import { LoginService } from '../../services/login.service';
+import { StaffService } from "../../services/staff.service";
+import { SkillService } from "../../services/skill.service";
+
+import { Skill } from '../../entities/skill';
+import { Staff } from '../../entities/staff';
+
 
 @Component({
   selector: 'mentor',
@@ -45,18 +48,6 @@ export class MentorComponent implements OnInit {
     // }
   }
 
-  getAllSkillsNames(): void {
-    for (let skill of this.allSkills) {
-      // this.allSkillsNames.push(skill.name)
-      // console.log(skill.name)
-      this.allSkillsNames.push(skill.name)
-    }
-  }
-
-  getAllSkills(): void {
-    this.allSkills = this.skillService.getAllSkills()
-  }
-
   getCurrentStaff(): Staff {
     return this.staffService.currentStaff
   }
@@ -68,9 +59,6 @@ export class MentorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllSkills();
-    this.getAllSkillsNames();
-    // this.getCurrentStaff();
   }
 
   openDialog() {

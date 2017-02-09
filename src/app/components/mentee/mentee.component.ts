@@ -1,13 +1,15 @@
-import {Component, OnInit, Optional} from '@angular/core';
-import {SkillService} from '../../services/skill.service';
-import {StaffService} from '../../services/staff.service';
-import {Skill} from '../../entities/skill';
-import {Staff} from '../../entities/staff';
-import {LoginService} from "../../services/login.service";
-import {MdDialog, MdDialogRef} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MdDialog, MdDialogRef } from '@angular/material';
+
+import { LoginService } from '../../services/login.service';
+import { StaffService } from "../../services/staff.service";
+import { SkillService } from "../../services/skill.service";
+
+import { Skill } from '../../entities/skill';
+import { Staff } from '../../entities/staff';
+
 
 @Component({
-  moduleId: module.id,
   selector: 'mentee',
   templateUrl: 'mentee.component.html',
   styleUrls: ['mentee.component.css']
@@ -17,8 +19,7 @@ export class MenteeComponent implements OnInit {
   constructor(private loginService: LoginService, private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
     console.log('initializing mentee constructor')
   }
-
-  // skills = ['Concordion', 'Cucumber', 'Selenium', 'C++', 'Scrum Master', 'ISTQB'];
+  
   selectedSkill: Skill;
   allSkills: Skill[];
   allSkillsNames = [];
@@ -47,18 +48,6 @@ export class MenteeComponent implements OnInit {
     // }
   }
 
-  getAllSkillsNames(): void {
-    for (let skill of this.allSkills) {
-      // this.allSkillsNames.push(skill.name)
-      // console.log(skill.name)
-      this.allSkillsNames.push(skill.name)
-    }
-  }
-
-  getAllSkills(): void {
-    this.allSkills = this.skillService.getAllSkills()
-  }
-
   getCurrentStaff(): Staff {
     return this.staffService.currentStaff
   }
@@ -70,8 +59,6 @@ export class MenteeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllSkills();
-    this.getAllSkillsNames();
   }
 
   openDialog() {

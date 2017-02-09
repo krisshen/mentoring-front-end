@@ -1,9 +1,5 @@
 export class Skill {
-  id: string
-  category: {
-    id: string
-    name: string
-    comment: string
-  }
-  name: string
+  id: string;
+  name: string;
+  categoryID: string;
 }

@@ -5,7 +5,7 @@
          type="search"
          placeholder="a skill"
          [(ngModel)]="newSkill.value"
-         [source]="skillService.defaultAllSkills"
+         [source]="skillService.allSkillsName"
          (keyup.enter)="addMentorSkill(newSkill.value); newSkill.value=''"
          (blur)="addMentorSkill(newSkill.value); newSkill.value='' "
          #newSkill>
@@ -21,4 +21,6 @@
   {{newSkill.value}}
 </ul>
 </div>
-<div *ngIf="!staffService.isStaffLoaded"><md-spinner></md-spinner></div>
+<div *ngIf="!staffService.isStaffLoaded">
+  <md-spinner></md-spinner>
+</div>

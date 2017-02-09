@@ -1,43 +1,36 @@
-import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
-import {Skill} from "../entities/skill";
+import { Observable } from "rxjs";
+
+import { Skill } from "../entities/skill";
 
 
 @Injectable()
 export class SkillService {
-
+  private skillsUrl = 'http://localhost:8080/skills';
 
   constructor(private http: Http) {
   }
 
-  allskills: Skill[]
-  defaultAllSkills: string[] = [
-    'Apple',
-    'Agile',
-    'Automation',
-    'Java',
-    'Groovy',
-    'HP ALM',
-    'HP UFT',
-    'Oracle SQL',
-    'DevOps'
-  ];
+  allSkills: Skill[];
+  allSkillsName: string[] = [];
 
-  getAllSkills(): Skill[] {
-    this.allskills = [
-      {id: '1', category: {id: '1', name: 'IT', comment: 'this is for IT'}, name: 'test'},
-      {id: '2', category: {id: '2', name: 'IT', comment: 'this is for IT'}, name: 'dev'},
-      {id: '3', category: {id: '3', name: 'Agile', comment: 'this is for IT'}, name: 'coach'}
-    ]
-    return this.allskills
+  getAllSkills(): Observable<any> {
+    console.log('SkillService.getAllSkills ...');
+
+    return this.http
+      .get(this.skillsUrl)
+      .map(res => res.json())
+  }
+
+  getAllSkillsName(): void {
+      for (let skill of this.allSkills) {
+      this.allSkillsName.push(skill.name)
+    }
   }
 
   getSelectedSkill(skillName: string): Skill {
-
-    return this.allskills.find(skill => skill.name == skillName)
-
+    return this.allSkills.find(skill => skill == skillName)
   }
-
 }

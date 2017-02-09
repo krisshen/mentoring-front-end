@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/toPromise';
-import {Staff} from "../entities/staff";
-import {HttpService} from "./http.service";
-import {Http} from "@angular/http";
-import {Observable} from "rxjs";
+import { Http } from "@angular/http";
 
+import {Observable} from "rxjs";
+import 'rxjs/add/operator/toPromise';
+
+import {Staff} from "../entities/staff";
 
 
 @Injectable()
 export class StaffService {
+  private allStaffsUrl = 'staffs';
+  private staffUrl = 'http://localhost:8080/staff/';
+  private menteeListUrl = 'http://localhost:8080/menteeList';
 
-  private allStaffsUrl = 'staffs'
-  private staffUrl = 'http://localhost:8080/staff/'
-  private menteeListUrl = 'http://localhost:8080/menteeList/'
-
-  currentStaff: Staff
-  isStaffLoaded: boolean
+  currentStaff: Staff;
+  isStaffLoaded: boolean;
 
   constructor(private http: Http) { }
 

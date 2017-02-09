@@ -5,8 +5,6 @@ export class Staff {
   id: string;
   name: string;
   email: string;
-  // mentorSkills: Skill[]
-  // menteeSkills: Skill[]
   mentorSkills: string[];
   menteeSkills: string[];
 
