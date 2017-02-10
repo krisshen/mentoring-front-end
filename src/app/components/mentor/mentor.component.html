@@ -6,16 +6,15 @@
          placeholder="a skill"
          [(ngModel)]="newSkill.value"
          [source]="skillService.allSkillsName"
-         (keyup.enter)="addMentorSkill(newSkill.value); newSkill.value=''"
-         (blur)="addMentorSkill(newSkill.value); newSkill.value='' "
          #newSkill>
 </md-input-container>
+<button md-mini-fab (click)="addMentorSkill(newSkill.value); newSkill.value=''"><md-icon>add</md-icon></button>
 <div *ngIf="staffService.isStaffLoaded">
 <ul>
   <li *ngFor="let skill of getCurrentStaff().mentorSkills">
     <button md-button (click)="openDialog()" style="text-align: left">{{skill}}</button>
     <button class="delete"
-            (click)="delete(skill); $event.stopPropagation()">x
+            (click)="removeMentorSkill(skill); $event.stopPropagation()">x
     </button>
   </li>
   {{newSkill.value}}

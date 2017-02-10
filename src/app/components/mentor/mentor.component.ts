@@ -1,11 +1,9 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
-import { LoginService } from '../../services/login.service';
 import { StaffService } from "../../services/staff.service";
 import { SkillService } from "../../services/skill.service";
 
-import { Skill } from '../../entities/skill';
 import { Staff } from '../../entities/staff';
 
 
@@ -16,45 +14,41 @@ import { Staff } from '../../entities/staff';
 })
 export class MentorComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
+  constructor(private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
     console.log('initializing mentor constructor')
   }
 
-  selectedSkill: Skill;
-  allSkills: Skill[];
+  selectedSkill: string;
   allSkillsNames = [];
   lastDialogResult: string;
-
-  addMentorSkill(newSkill: string) {
-
-    // newSkill = newSkill.trim().toLowerCase();
-    //
-    // if (newSkill != '' && !this.staffService.currentStaff.mentorSkills.find(skill => skill.name.toLowerCase() === newSkill)) {
-    //
-    //   //get skill info from all skills
-    //   this.selectedSkill = this.skillService.getSelectedSkill(newSkill);
-    //
-    //   if (this.selectedSkill == null) {
-    //     console.log('this skill is not in the all-skill list')
-    //   } else {
-    //     console.log('in all-skill list');
-    //     //and update this skill to current mentor
-    //     this.staffService.currentStaff.mentorSkills.push(this.selectedSkill);
-    //   }
-    //
-    //   //and get the latest all-skill list
-    //   this.getAllSkillsNames();
-    //   newSkill = ""
-    // }
-  }
 
   getCurrentStaff(): Staff {
     return this.staffService.currentStaff
   }
 
-  delete(skill: string) {
-    // // this.currentStaff.mentorSkills = [{name: 'test'}, {name: 'autotest'}
-    console.log('deleting skill: ' + skill);
+  addMentorSkill(newSkill: string) {
+    newSkill = newSkill.trim();
+
+    // If new skill not equals to '' and
+    // new skill not already in the mentor skill list and
+    // new skill is in the list of all skills, then...
+    if (newSkill != '' && !this.staffService.currentStaff.mentorSkills.find(skill => skill === newSkill) && this.skillService.allSkillsName.find(skill => skill === newSkill)) {
+
+      this.selectedSkill = newSkill;
+
+      if (this.selectedSkill == null) {
+        console.log('this skill is not in the all-skill list')
+      } else {
+        console.log('in all-skill list');
+        this.staffService.currentStaff.mentorSkills.push(this.selectedSkill);
+      }
+
+      newSkill = ""
+    }
+  }
+
+  removeMentorSkill(skill: string) {
+    console.log('deleting mentor skill: ' + skill);
     this.staffService.currentStaff.mentorSkills = this.staffService.currentStaff.mentorSkills.filter(mentorskill => mentorskill != skill)
   }
 
@@ -73,7 +67,7 @@ export class MentorComponent implements OnInit {
 @Component({
   template: `
     <h1 md-dialog-title>Overview of the mentee</h1>
-    <md-list *ngFor="let mentee of mentees" dense>
+    <md-list *ngFor="let mentee of mentees">
       <md-list-item>{{mentee.viewValue}}</md-list-item>
     </md-list>
   `,
