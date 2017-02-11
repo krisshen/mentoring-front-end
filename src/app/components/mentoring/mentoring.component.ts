@@ -55,4 +55,10 @@ export class MentoringComponent implements OnInit {
   gotoAdmin() {
     this.router.navigate(['/admin']);
   }
+
+  saveMentorSkillsUpdate(): void {
+    console.log('here');
+    console.log(this.staffID);
+    this.staffService.putMentorSkillsChange(this.staffService.currentStaff);
+  }
 }

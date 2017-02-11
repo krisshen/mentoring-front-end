@@ -1,4 +1,3 @@
-<!--<div [ngStyle]="{'background-image': 'url(' + backgroundPhotoUrl + ')', 'height': '95%', 'opacity': '0.9'}">-->
 <br>
 <div *ngIf="isAdmin">
   <button md-raised-button color="primary" (click)="gotoAdmin()">ADMIN</button>
@@ -28,6 +27,5 @@
 </md-grid-list>
 
 <span class="app-action">
-  <button md-fab><md-icon>check circle</md-icon></button>
+  <button md-fab (click)="saveMentorSkillsUpdate()"><md-icon>check circle</md-icon></button>
 </span>
-<!--</div>-->

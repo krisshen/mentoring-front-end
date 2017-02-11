@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from "@angular/http";
+import { Headers, Http } from "@angular/http";
 
 import {Observable} from "rxjs";
 import 'rxjs/add/operator/toPromise';
@@ -9,9 +9,12 @@ import {Staff} from "../entities/staff";
 
 @Injectable()
 export class StaffService {
+  private headers = new Headers({'Content-Type': 'application/json'});
+
   private allStaffsUrl = 'staffs';
   private staffUrl = 'http://localhost:8080/staff/';
   private menteeListUrl = 'http://localhost:8080/menteeList';
+  private mentorSkillsChangeUrl = 'http://localhost:8080/mentorSkillsUpdate/';
 
   currentStaff: Staff;
   isStaffLoaded: boolean;
@@ -54,9 +57,13 @@ export class StaffService {
       .map(res => res.json())
   }
 
-  // updateStaff(staff: Staff): Promise<Staff> {
-  //
-  //   return
-  // }
+  putMentorSkillsChange(staff: Staff): Observable<any> {
+    console.log('Send HTTP request to the backend ******************************* ');
+    console.log(JSON.stringify(staff));
+    console.log('******************************* ');
 
+    return this.http
+      .put(this.mentorSkillsChangeUrl + staff, JSON.stringify(staff), {headers: this.headers})
+      .map(res => res.json())
+  }
 }
