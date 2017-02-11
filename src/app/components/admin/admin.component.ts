@@ -27,5 +27,14 @@ export class AdminComponent implements OnInit {
     this.allSkills = this.skillService.allSkills
   }
 
+  upsertCategory(categoryName: string, description: string) {
+    console.log("admin.component.upsertCategory: " + categoryName + ', ' + description)
 
+    this.categoryService.upsertCategory(new Category({id: categoryName.trim().replace(' ','').toLowerCase(), name: categoryName, description: description}))
+      .subscribe(
+        data => this.allCategories = data,
+        error => alert(error),
+        () => console.log('Post a Category Complete!')
+      )
+  }
 }

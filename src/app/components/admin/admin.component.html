@@ -8,16 +8,16 @@
 <div class="app-content">
   <md-card class="app-input-section">
     <p>Update Categories</p>
-    <md-input placeholder="Category"></md-input>
-    <md-input placeholder="Description"></md-input>
-    <button md-button>Submit</button>
+    <md-input placeholder="Category" [(ngModel)]="cate.value" #cate></md-input>
+    <md-input placeholder="Description" [(ngModel)]="desc.value" #desc></md-input>
+    <button md-button (click)="upsertCategory(cate.value, desc.value); cate.value=''; desc.value=''">Submit</button>
     <div *ngIf="!categoryService.isAllCategoriesLoaded">
       <md-spinner></md-spinner>
     </div>
     <div *ngIf="categoryService.isAllCategoriesLoaded">
       <ul>
         <li *ngFor="let category of allCategories">
-          <button md-button>{{category.name}}</button>
+          <button md-button md-tooltip={{category.description}}>{{category.name}}</button>
           <!--<button class="delete"-->
           <!--(click)="removeMentorSkill(skill); $event.stopPropagation()">x-->
           <!--</button>-->
@@ -33,7 +33,7 @@
     <button md-button>Submit</button>
     <ul>
       <li *ngFor="let skill of this.allSkills">
-        <button md-button>{{skill.name}}</button>
+        <button md-button md-tooltip={{skill.categoryID}}>{{skill.name}}</button>
         <!--<button class="delete"-->
         <!--(click)="removeMentorSkill(skill); $event.stopPropagation()">x-->
         <!--</button>-->
