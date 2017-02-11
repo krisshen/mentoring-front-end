@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CategoryService} from "../../services/category.service";
 import {Category} from "../../entities/category";
+import {SkillService} from "../../services/skill.service";
+import {Skill} from "../../entities/skill";
 
 @Component({
   selector: 'app-admin',
@@ -9,10 +11,10 @@ import {Category} from "../../entities/category";
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private skillService: SkillService) { }
 
   allCategories: Category[]
-
+  allSkills: Skill[]
 
   ngOnInit() {
     this.categoryService.getAllCategories()
@@ -22,6 +24,7 @@ export class AdminComponent implements OnInit {
         () => (this.categoryService.isAllCategoriesLoaded = true,
           console.log('Get All Categories Complete!'))
       )
+    this.allSkills = this.skillService.allSkills
   }
 
 

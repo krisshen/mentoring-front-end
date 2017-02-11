@@ -1,8 +1,7 @@
 <div *ngIf="!categoryService.isAllCategoriesLoaded">
   <md-progress-bar
     class="app-progress"
-    mode="indeterminate"
-    aria-label="Indeterminate progress-bar example">
+    mode="indeterminate">
   </md-progress-bar>
 </div>
 
@@ -26,13 +25,21 @@
         <!--{{newSkill.value}}-->
       </ul>
     </div>
-
   </md-card>
   <md-card class="app-input-section">
     <p>Update Skills</p>
     <md-input placeholder="Skill"></md-input>
     <md-input placeholder="Category"></md-input>
     <button md-button>Submit</button>
+    <ul>
+      <li *ngFor="let skill of this.allSkills">
+        <button md-button>{{skill.name}}</button>
+        <!--<button class="delete"-->
+        <!--(click)="removeMentorSkill(skill); $event.stopPropagation()">x-->
+        <!--</button>-->
+      </li>
+      <!--{{newSkill.value}}-->
+    </ul>
   </md-card>
 </div>
 
