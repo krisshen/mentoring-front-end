@@ -57,13 +57,14 @@ export class StaffService {
       .map(res => res.json())
   }
 
-  putMentorSkillsChange(staff: Staff): Observable<any> {
+  putMentorSkillsChange(staff: Staff, id: string): Observable<any> {
     console.log('Send HTTP request to the backend ******************************* ');
+    console.log(this.mentorSkillsChangeUrl + id);
     console.log(JSON.stringify(staff));
     console.log('******************************* ');
 
     return this.http
-      .put(this.mentorSkillsChangeUrl + staff, JSON.stringify(staff), {headers: this.headers})
+      .post(this.mentorSkillsChangeUrl + id, JSON.stringify(staff), {headers: this.headers})
       .map(res => res.json())
   }
 }

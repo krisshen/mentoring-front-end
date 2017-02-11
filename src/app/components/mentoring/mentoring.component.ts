@@ -59,6 +59,6 @@ export class MentoringComponent implements OnInit {
   saveMentorSkillsUpdate(): void {
     console.log('here');
     console.log(this.staffID);
-    this.staffService.putMentorSkillsChange(this.staffService.currentStaff);
+    this.staffService.putMentorSkillsChange(this.staffService.currentStaff, this.staffID);
   }
 }
