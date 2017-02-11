@@ -54,7 +54,7 @@ export class LoginComponent {
     console.log('Email: ' + profile.getEmail());
 
     //ToDo: use my name for now ...
-    if (profile.getName() == 'Kris Shen') {
+    if (profile.getName() == 'Kris Shen' || profile.getName() == 'Di Zhang') {
       this.loginService.setAdminFlag(true);
     }
     this.loginService.setLoginFlag(true);
