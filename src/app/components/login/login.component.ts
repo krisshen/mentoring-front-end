@@ -53,6 +53,7 @@ export class LoginComponent {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());
 
+    //ToDo: use my name for now ...
     if (profile.getName() == 'Kris Shen') {
       this.loginService.setAdminFlag(true);
     }

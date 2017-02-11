@@ -1,3 +1,10 @@
+<div *ngIf="!staffService.isStaffLoaded">
+  <md-progress-bar
+    class="app-progress"
+    mode="indeterminate">
+  </md-progress-bar>
+</div>
+
 <br>
 <div *ngIf="isAdmin">
   <button md-raised-button color="primary" (click)="gotoAdmin()">ADMIN</button>
