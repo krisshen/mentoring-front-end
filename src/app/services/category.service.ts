@@ -30,7 +30,7 @@ export class CategoryService {
 
     return this.http
       .post(this.upsertCategoryUrl + category.id, category, {headers: new Headers({'Content-Type': 'application/json'})} )
-      .map(res => res.json())
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+      .map(res => res.toString())
+      .catch((error:any) => Observable.throw('Server error'));
   }
 }

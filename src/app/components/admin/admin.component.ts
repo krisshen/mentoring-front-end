@@ -32,7 +32,7 @@ export class AdminComponent implements OnInit {
 
     this.categoryService.upsertCategory(new Category({id: categoryName.trim().replace(' ','').toLowerCase(), name: categoryName, description: description}))
       .subscribe(
-        data => this.allCategories = data,
+        data => console.log(data),
         error => alert(error),
         () => console.log('Post a Category Complete!')
       )
