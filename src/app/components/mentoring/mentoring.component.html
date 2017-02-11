@@ -1,33 +1,33 @@
-<div [ngStyle]="{'background-image': 'url(' + backgroundPhotoUrl + ')', 'height': '95%', 'opacity': '0.9'}">
-  <br>
-  <div *ngIf="isAdmin">
-    <button md-raised-button color="primary" (click)="gotoAdmin()">ADMIN</button>
-  </div>
+<!--<div [ngStyle]="{'background-image': 'url(' + backgroundPhotoUrl + ')', 'height': '95%', 'opacity': '0.9'}">-->
+<br>
+<div *ngIf="isAdmin">
+  <button md-raised-button color="primary" (click)="gotoAdmin()">ADMIN</button>
+</div>
 
-  <md-grid-list cols="2">
-    <md-grid-tile>
-      <md-card style="width: 60%">
-        <md-card-title align="center">
-          As a Mentor
-        </md-card-title>
-        <md-card-content style="height: 400px; overflow-y: auto">
-          <mentor></mentor>
-        </md-card-content>
-      </md-card>
-    </md-grid-tile>
-    <md-grid-tile>
-      <md-card style="width: 60%">
-        <md-card-title align="center">
-          As a Mentee
-        </md-card-title>
-        <md-card-content style="height: 400px; overflow-y: auto">
-          <mentee></mentee>
-        </md-card-content>
-      </md-card>
-    </md-grid-tile>
-  </md-grid-list>
+<md-grid-list cols="2">
+  <md-grid-tile>
+    <md-card style="width: 60%">
+      <md-card-title align="center">
+        As a Mentor
+      </md-card-title>
+      <md-card-content style="height: 400px; overflow-y: auto">
+        <mentor></mentor>
+      </md-card-content>
+    </md-card>
+  </md-grid-tile>
+  <md-grid-tile>
+    <md-card style="width: 60%">
+      <md-card-title align="center">
+        As a Mentee
+      </md-card-title>
+      <md-card-content style="height: 400px; overflow-y: auto">
+        <mentee></mentee>
+      </md-card-content>
+    </md-card>
+  </md-grid-tile>
+</md-grid-list>
 
 <span class="app-action">
   <button md-fab><md-icon>check circle</md-icon></button>
 </span>
-</div>
+<!--</div>-->
