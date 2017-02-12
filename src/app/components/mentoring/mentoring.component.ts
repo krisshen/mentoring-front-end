@@ -56,9 +56,12 @@ export class MentoringComponent implements OnInit {
     this.router.navigate(['/admin']);
   }
 
-  saveMentorSkillsUpdate(): void {
-    console.log('here');
-    console.log(this.staffID);
-    this.staffService.putMentorSkillsChange(this.staffService.currentStaff, this.staffID);
+  updateStaffSkills(): void {
+    this.staffService.putStaffSkillsChange(this.staffService.currentStaff, this.staffID)
+      .subscribe(
+        data => console.log(data),
+        error => alert(error),
+        () => (console.log('Update Staff Skills'))
+      )
   }
 }

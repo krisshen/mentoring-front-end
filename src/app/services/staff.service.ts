@@ -14,7 +14,7 @@ export class StaffService {
   private allStaffsUrl = 'staffs';
   private staffUrl = 'http://localhost:8080/staff/';
   private menteeListUrl = 'http://localhost:8080/menteeList';
-  private mentorSkillsChangeUrl = 'http://localhost:8080/mentorSkillsUpdate/';
+  private staffSkillsChangeUrl = 'http://localhost:8080/staffSkillsUpdate/';
 
   currentStaff: Staff;
   isStaffLoaded: boolean;
@@ -57,14 +57,14 @@ export class StaffService {
       .map(res => res.json())
   }
 
-  putMentorSkillsChange(staff: Staff, id: string): Observable<any> {
+  putStaffSkillsChange(staff: Staff, id: string): Observable<any> {
     console.log('Send HTTP request to the backend ******************************* ');
-    console.log(this.mentorSkillsChangeUrl + id);
     console.log(JSON.stringify(staff));
     console.log('******************************* ');
 
     return this.http
-      .post(this.mentorSkillsChangeUrl + id, JSON.stringify(staff), {headers: this.headers})
+      .post(this.staffSkillsChangeUrl + id, JSON.stringify(staff), {headers: this.headers})
       .map(res => res.json())
+      .catch((error:any) => Observable.throw('Server error'));
   }
 }
