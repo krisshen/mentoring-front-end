@@ -13,11 +13,13 @@ export class StaffService {
 
   private allStaffsUrl = 'staffs';
   private staffUrl = 'http://localhost:8080/staff/';
-  private menteeListUrl = 'http://localhost:8080/menteeList';
+  private menteeListUrl = 'http://localhost:8080/menteeList/';
   private staffSkillsChangeUrl = 'http://localhost:8080/staffSkillsUpdate/';
 
   currentStaff: Staff;
   isStaffLoaded: boolean;
+  isMenteeLoaded: boolean = false;
+  isMentorLoaded: boolean;
 
   constructor(private http: Http) { }
 
@@ -46,22 +48,18 @@ export class StaffService {
 
 
     return this.http.get(this.staffUrl + id)
-      .map(res => res.json())
+      .map(res => res.json());
 
     // return this.currentStaff
 
   }
 
-  getMenteeList(staffID: string, skillID: string): Observable<any[]> {
-    return this.http.get(this.menteeListUrl + staffID + '/' + skillID)
-      .map(res => res.json())
+  getMenteeList(skill: string, id: string): Observable<any> {
+    return this.http.get(this.menteeListUrl + id + '/' + skill)
+      .map(res => res.json());
   }
 
   putStaffSkillsChange(staff: Staff, id: string): Observable<any> {
-    console.log('Send HTTP request to the backend ******************************* ');
-    console.log(JSON.stringify(staff));
-    console.log('******************************* ');
-
     return this.http
       .post(this.staffSkillsChangeUrl + id, JSON.stringify(staff), {headers: this.headers})
       .map(res => res.json())
