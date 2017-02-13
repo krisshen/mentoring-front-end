@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+
 import { LoginService } from '../../services/login.service';
 import { StaffService } from "../../services/staff.service";
 import { SkillService } from "../../services/skill.service";
@@ -13,7 +15,7 @@ import { SkillService } from "../../services/skill.service";
 })
 export class MentoringComponent implements OnInit {
 
-  constructor(private staffService: StaffService, private router: Router, private loginService: LoginService, private skillService: SkillService) {
+  constructor(private router: Router, private snackBar: MdSnackBar, private loginService: LoginService, private staffService: StaffService, private skillService: SkillService) {
     console.log('initializing mentoring constructor')
   }
 
@@ -61,7 +63,14 @@ export class MentoringComponent implements OnInit {
       .subscribe(
         data => console.log(data),
         error => alert(error),
-        () => (console.log('Update Staff Skills'))
+        () => (this.openSnackBar(),
+          console.log('Update Staff Skills'))
       )
+  }
+
+  openSnackBar() {
+    let config = new MdSnackBarConfig();
+    config.duration = 1500;
+    this.snackBar.open("Skills have updated!", '', config);
   }
 }

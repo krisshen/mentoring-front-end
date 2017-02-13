@@ -14,7 +14,7 @@ import { Staff } from '../../entities/staff';
 })
 export class MenteeComponent implements OnInit {
 
-  constructor(private skillService: SkillService, private staffService: StaffService, private _dialog: MdDialog) {
+  constructor(private staffService: StaffService, private skillService: SkillService, private _dialog: MdDialog) {
     console.log('initializing mentee constructor')
   }
 
