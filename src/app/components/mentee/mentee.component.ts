@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { Component } from '@angular/core';
+import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 
 import { StaffService } from "../../services/staff.service";
 import { SkillService } from "../../services/skill.service";
@@ -12,15 +12,14 @@ import { Staff } from '../../entities/staff';
   templateUrl: 'mentee.component.html',
   styleUrls: ['mentee.component.css']
 })
-export class MenteeComponent implements OnInit {
+export class MenteeComponent {
 
-  constructor(private staffService: StaffService, private skillService: SkillService, private _dialog: MdDialog) {
+  constructor(private staffService: StaffService, private skillService: SkillService, private dialog: MdDialog) {
     console.log('initializing mentee constructor')
   }
 
   selectedSkill: string;
-  allSkillsNames = [];
-  lastDialogResult: string;
+  dialogRef:MdDialogRef<MenteeDialog>;
 
   getCurrentStaff(): Staff {
     return this.staffService.currentStaff
@@ -39,7 +38,7 @@ export class MenteeComponent implements OnInit {
       if (this.selectedSkill == null) {
         console.log('this skill is not in the all-skill list')
       } else {
-        console.log('in all-skill list')
+        console.log('in all-skill list');
         this.staffService.currentStaff.menteeSkills.push(this.selectedSkill);
       }
 
@@ -52,41 +51,30 @@ export class MenteeComponent implements OnInit {
     this.staffService.currentStaff.menteeSkills = this.staffService.currentStaff.menteeSkills.filter(menteeskill => menteeskill != skill)
   }
 
-  ngOnInit(): void {
-  }
-
-  openDialog() {
-    let dialogRef = this._dialog.open(MenteeDialog);
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.lastDialogResult = result;
-    })
+  retrieveMentors(skill: string): void {
+    let config = new MdDialogConfig();
+    this.dialogRef = this.dialog.open(MenteeDialog, config);
+    this.dialogRef.componentInstance.mentors = this.staffService.allStaff;
+    this.dialogRef.componentInstance.skill = skill;
   }
 }
 
 @Component({
   template: `
-    <h1 md-dialog-title>Select Your Mentor</h1>
+    <h1 md-dialog-title>Overview of all mentees</h1>
     <md-select placeholder="Mentor" [(ngModel)]="selectedMentor" name="mentor">
-      <md-option *ngFor="let mentor of mentors" [value]="mentor.value">
-       {{mentor.viewValue}}
+      <md-option *ngFor="let mentor of (mentors | staffFilter: skill:role)" [value]="mentor.name">
+        {{mentor.name}}
       </md-option>
     </md-select>
-    <p> Mentor: {{selectedMentor}} </p>
+    <p> Selected Mentor: {{selectedMentor}} </p>
     <button md-mini-fab (click)="dialogRef.close(selectedMentor)"><md-icon>check</md-icon></button>
   `,
 })
 export class MenteeDialog {
-  constructor(public dialogRef: MdDialogRef<MenteeDialog>) {}
-
+  mentors: Staff[];
+  skill: string;
+  role: 'mentor';
   selectedMentor: string;
-
-  mentors = [
-    {value: 'Di', viewValue: 'Di Zhang'},
-    {value: 'Yang', viewValue: 'Yang Shen'},
-    {value: 'Cillin', viewValue: 'Cillin Hearns'},
-    {value: 'Daniel', viewValue: 'Daniel Kate'},
-    {value: 'Alex', viewValue: 'Alex Alexis'},
-    {value: 'Jad', viewValue: 'Jad Jeff'}
-  ];
+  constructor(public dialogRef: MdDialogRef<MenteeDialog>) { }
 }

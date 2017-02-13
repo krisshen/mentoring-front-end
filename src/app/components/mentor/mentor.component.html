@@ -9,7 +9,7 @@
          #newSkill>
 </md-input-container>
 <button md-mini-fab (click)="addMentorSkill(newSkill.value); newSkill.value=''"><md-icon>add</md-icon></button>
-<div *ngIf="staffService.isStaffLoaded">
+<div *ngIf="staffService.isStaffLoaded && staffService.allStaffLoaded">
 <ul>
   <li *ngFor="let skill of getCurrentStaff().mentorSkills">
     <button md-button (click)="retrieveMentees(skill)" style="text-align: left">{{skill}}</button>
@@ -20,6 +20,6 @@
   {{newSkill.value}}
 </ul>
 </div>
-<div *ngIf="!staffService.isStaffLoaded">
+<div *ngIf="!staffService.isStaffLoaded || !staffService.allStaffLoaded">
   <md-spinner></md-spinner>
 </div>

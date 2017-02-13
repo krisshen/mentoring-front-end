@@ -51,6 +51,13 @@ export class MentoringComponent implements OnInit {
           () => (this.skillService.getAllSkillsName(),
             console.log('Get All SKills Complete!'))
         );
+      this.staffService.getAllStaff()
+        .subscribe(
+          data => this.staffService.allStaff = data,
+          error => alert(error),
+          () => (this.staffService.allStaffLoaded = true,
+            console.log('Get All Staff Complete!'))
+        );
     }
   }
 

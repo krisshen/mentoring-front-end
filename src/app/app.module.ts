@@ -20,6 +20,7 @@ import {HttpService} from "./services/http.service";
 import {AdminComponent} from './components/admin/admin.component';
 import {CategoryService} from "./services/category.service";
 import { CategorydialogComponent } from './components/categorydialog/categorydialog.component';
+import { StaffFilterPipe } from './pipes/staff-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CategorydialogComponent } from './components/categorydialog/categorydia
     PlaceHolderComponent,
     DialogContent,
     AdminComponent,
-    CategorydialogComponent
+    CategorydialogComponent,
+    StaffFilterPipe
   ],
   imports: [
     BrowserModule,

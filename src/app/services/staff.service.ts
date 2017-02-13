@@ -11,15 +11,14 @@ import {Staff} from "../entities/staff";
 export class StaffService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  private allStaffsUrl = 'staffs';
   private staffUrl = 'http://localhost:8080/staff/';
-  private menteeListUrl = 'http://localhost:8080/menteeList/';
+  private allStaffUrl = 'http://localhost:8080/allStaff';
   private staffSkillsChangeUrl = 'http://localhost:8080/staffSkillsUpdate/';
 
   currentStaff: Staff;
-  isStaffLoaded: boolean;
-  isMenteeLoaded: boolean = false;
-  isMentorLoaded: boolean;
+  allStaff: Staff[];
+  isStaffLoaded: boolean = false;
+  allStaffLoaded: boolean = false;
 
   constructor(private http: Http) { }
 
@@ -54,8 +53,8 @@ export class StaffService {
 
   }
 
-  getMenteeList(skill: string, id: string): Observable<any> {
-    return this.http.get(this.menteeListUrl + id + '/' + skill)
+  getAllStaff(): Observable<any> {
+    return this.http.get(this.allStaffUrl)
       .map(res => res.json());
   }
 

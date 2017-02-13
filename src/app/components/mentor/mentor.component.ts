@@ -14,12 +14,11 @@ import { Staff } from '../../entities/staff';
 })
 export class MentorComponent {
 
-  constructor(private skillService: SkillService, private staffService: StaffService, private dialog: MdDialog) {
+  constructor(private staffService: StaffService, private skillService: SkillService, private dialog: MdDialog) {
     console.log('initializing mentor constructor')
   }
 
   selectedSkill: string;
-  menteeList: Staff[];
   dialogRef:MdDialogRef<MentorDialog>;
 
   getCurrentStaff(): Staff {
@@ -53,34 +52,24 @@ export class MentorComponent {
   }
 
   retrieveMentees(skill: string): void {
-    this.staffService.getMenteeList(skill, this.getCurrentStaff().id)
-      .subscribe(
-        data => this.menteeList = data,
-        error => alert(error),
-        () => (this.staffService.isMenteeLoaded = true,
-            console.log('Retrieve mentee list'))
-      );
-
     let config = new MdDialogConfig();
     this.dialogRef = this.dialog.open(MentorDialog, config);
-    this.dialogRef.componentInstance.mentees = this.menteeList;
+    this.dialogRef.componentInstance.mentees = this.staffService.allStaff;
+    this.dialogRef.componentInstance.skill = skill;
   }
 }
 
 @Component({
   template: `
-    <h1 md-dialog-title>Overview of the mentee</h1>
-    <div *ngIf="!staffService.isMenteeLoaded">
-      <md-spinner></md-spinner>
-    </div>
-    <div *ngIf="staffService.isMenteeLoaded">
-      <md-list *ngFor="let mentee of mentees">
-        <md-list-item>{{mentee.name}}</md-list-item>
-      </md-list>
-    </div>
+    <h1 md-dialog-title>Overview of all mentees</h1>
+    <md-list *ngFor="let mentee of (mentees | staffFilter: skill:role)">
+      <md-list-item>{{mentee.name}}</md-list-item>
+    </md-list>
   `,
 })
 export class MentorDialog {
   mentees: Staff[];
-  constructor(private staffService: StaffService, public dialogRef: MdDialogRef<MentorDialog>) { }
+  skill: string;
+  role = 'mentee';
+  constructor(public dialogRef: MdDialogRef<MentorDialog>) { }
 }
