@@ -17,7 +17,7 @@
     <div *ngIf="categoryService.isAllCategoriesLoaded">
       <ul>
         <li *ngFor="let category of allCategories">
-          <button md-button md-tooltip={{category.description}}>{{category.name}}</button>
+          <button md-button (click)="openCategoryDialog(category.id)" md-tooltip={{category.description}}>{{category.name}}</button>
           <!--<button class="delete"-->
           <!--(click)="removeMentorSkill(skill); $event.stopPropagation()">x-->
           <!--</button>-->

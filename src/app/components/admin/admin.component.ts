@@ -3,6 +3,8 @@ import {CategoryService} from "../../services/category.service";
 import {Category} from "../../entities/category";
 import {SkillService} from "../../services/skill.service";
 import {Skill} from "../../entities/skill";
+import {CategorydialogComponent} from "../categorydialog/categorydialog.component"
+import {MdDialog} from "@angular/material";
 
 @Component({
   selector: 'app-admin',
@@ -11,10 +13,11 @@ import {Skill} from "../../entities/skill";
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private categoryService: CategoryService, private skillService: SkillService) { }
+  constructor(private categoryService: CategoryService, private skillService: SkillService, private _dialog: MdDialog) { }
 
   allCategories: Category[]
   allSkills: Skill[]
+  lastDialogResult: string
 
   ngOnInit() {
     this.categoryService.getAllCategories()
@@ -36,5 +39,16 @@ export class AdminComponent implements OnInit {
         error => alert(error),
         () => console.log('Post a Category Complete!')
       )
+  }
+
+  openCategoryDialog(category_id: string) {
+
+    console.log('category dialog opened')
+    this.skillService.getSkillsByCategoryID(category_id)
+
+    let dialogRef = this._dialog.open(CategorydialogComponent)
+    dialogRef.afterClosed().subscribe(result => {
+      this.lastDialogResult = result;
+    })
   }
 }

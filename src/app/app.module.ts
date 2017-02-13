@@ -19,6 +19,7 @@ import {LoginService} from "./services/login.service";
 import {HttpService} from "./services/http.service";
 import {AdminComponent} from './components/admin/admin.component';
 import {CategoryService} from "./services/category.service";
+import { CategorydialogComponent } from './components/categorydialog/categorydialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {CategoryService} from "./services/category.service";
     MentoringComponent,
     PlaceHolderComponent,
     DialogContent,
-    AdminComponent
+    AdminComponent,
+    CategorydialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,7 @@ import {CategoryService} from "./services/category.service";
     MenteeDialog,
     PlaceHolderComponent,
     DialogContent,
+    CategorydialogComponent
   ],
   providers: [CategoryService, SkillService, StaffService, LoginService, HttpService],
   bootstrap: [AppComponent]

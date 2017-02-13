@@ -16,6 +16,7 @@ export class SkillService {
   allSkills: Skill[];
   allSkillsName: string[] = [];
 
+
   getAllSkills(): Observable<any> {
     console.log('SkillService.getAllSkills ...');
 
@@ -32,5 +33,12 @@ export class SkillService {
 
   getSelectedSkill(skillName: string): Skill {
     return this.allSkills.find(skill => skill.name == skillName)
+  }
+
+  skillsByCategoryID: Skill[]
+  getSkillsByCategoryID(category_id: string): Skill[] {
+
+    this.skillsByCategoryID = this.allSkills.filter(skill => skill.categoryID == category_id)
+    return this.skillsByCategoryID
   }
 }
