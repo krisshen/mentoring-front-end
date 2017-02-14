@@ -63,7 +63,7 @@ export class MentorComponent {
   template: `
     <h1 md-dialog-title>Overview of all mentees</h1>
     <div [ngSwitch]="(mentees | staffFilter: skill:role).length">
-      <div *ngSwitchCase="0">No mentees so far</div>
+      <div *ngSwitchCase="0">Oops, no mentees so far...</div>
       <div *ngSwitchDefault>
         <md-list *ngFor="let mentee of (mentees | staffFilter: skill:role)">
           <md-list-item>{{mentee.name}}</md-list-item>

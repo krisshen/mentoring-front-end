@@ -11,7 +11,6 @@ import { Staff } from '../../entities/staff';
 import { Match } from "../../entities/match";
 
 
-
 @Component({
   selector: 'mentee',
   templateUrl: 'mentee.component.html',
@@ -68,14 +67,19 @@ export class MenteeComponent {
 
 @Component({
   template: `
-    <h1 md-dialog-title>Overview of all mentees</h1>
-    <md-select placeholder="Mentor" [(ngModel)]="selectedMentor" name="mentor">
-      <md-option *ngFor="let mentor of (mentors | staffFilter: skill:role)" [value]="mentor.name">
-        {{mentor.name}}
-      </md-option>
-    </md-select>
-    <p> Selected Mentor: {{selectedMentor}} </p>
-    <button md-mini-fab (click)="save(selectedMentor)"><md-icon>check</md-icon></button>
+    <h1 md-dialog-title>Overview of all mentors</h1>
+    <div [ngSwitch]="(mentors | staffFilter: skill:role).length">
+      <div *ngSwitchCase="0">Oops, no mentors so far...</div>
+      <div *ngSwitchDefault>
+        <md-select placeholder="Mentor" [(ngModel)]="selectedMentor" name="mentor">
+          <md-option *ngFor="let mentor of (mentors | staffFilter: skill:role)" [value]="mentor.name">
+            {{mentor.name}}
+          </md-option>
+        </md-select>
+        <p> Selected Mentor: {{selectedMentor}} </p>
+        <button md-mini-fab (click)="save(selectedMentor)"><md-icon>check</md-icon></button>
+      </div>
+    </div>
   `,
 })
 export class MenteeDialog {
