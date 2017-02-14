@@ -19,13 +19,11 @@ export class MentoringComponent implements OnInit {
     console.log('initializing mentoring constructor')
   }
 
-  backgroundPhotoUrl: string;
   isloggedIn: boolean;
   isAdmin: boolean;
   staffID: string;
 
   ngOnInit() {
-    this.backgroundPhotoUrl = 'http://gencept.com/wp-content/uploads/2016/04/Wallpaper-of-the-Week-25-Material-Design-Inspired-Wallpapers_24-@-GenCept.png';
     this.isloggedIn = this.loginService.isLoggedIn();
     this.isAdmin = this.loginService.isAdmin();
 

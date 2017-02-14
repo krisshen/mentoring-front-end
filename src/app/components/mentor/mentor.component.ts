@@ -62,14 +62,20 @@ export class MentorComponent {
 @Component({
   template: `
     <h1 md-dialog-title>Overview of all mentees</h1>
-    <md-list *ngFor="let mentee of (mentees | staffFilter: skill:role)">
-      <md-list-item>{{mentee.name}}</md-list-item>
-    </md-list>
+    <div [ngSwitch]="(mentees | staffFilter: skill:role).length">
+      <div *ngSwitchCase="0">No mentees so far</div>
+      <div *ngSwitchDefault>
+        <md-list *ngFor="let mentee of (mentees | staffFilter: skill:role)">
+          <md-list-item>{{mentee.name}}</md-list-item>
+        </md-list>
+      </div>
+    </div>
   `,
 })
 export class MentorDialog {
   mentees: Staff[];
   skill: string;
   role = 'mentee';
+
   constructor(public dialogRef: MdDialogRef<MentorDialog>) { }
 }

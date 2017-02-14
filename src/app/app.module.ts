@@ -21,6 +21,7 @@ import {AdminComponent} from './components/admin/admin.component';
 import {CategoryService} from "./services/category.service";
 import { CategorydialogComponent } from './components/categorydialog/categorydialog.component';
 import { StaffFilterPipe } from './pipes/staff-filter.pipe';
+import { MatchService } from './services/match.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { StaffFilterPipe } from './pipes/staff-filter.pipe';
     DialogContent,
     CategorydialogComponent
   ],
-  providers: [CategoryService, SkillService, StaffService, LoginService, HttpService],
+  providers: [CategoryService, SkillService, StaffService, LoginService, HttpService, MatchService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
