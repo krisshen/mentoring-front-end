@@ -22,6 +22,8 @@ export class MentoringComponent implements OnInit {
   isloggedIn: boolean;
   isAdmin: boolean;
   staffID: string;
+  initialMentorSkills: string[];
+  initialMenteeSkills: string[];
 
   ngOnInit() {
     this.isloggedIn = this.loginService.isLoggedIn();
@@ -37,7 +39,9 @@ export class MentoringComponent implements OnInit {
       console.log('mentoring.OnInit... staff ID is: ' + this.staffID);
       this.staffService.getStaff(this.staffID)
         .subscribe(
-          data => this.staffService.currentStaff = data,
+          data => (this.staffService.currentStaff = data,
+            this.initialMentorSkills = data.mentorSkills.slice(),
+            this.initialMenteeSkills = data.menteeSkills.slice()),
           error => alert(error),
           () => (this.staffService.isStaffLoaded = true,
             console.log('Get Request Complete!'))
@@ -64,18 +68,34 @@ export class MentoringComponent implements OnInit {
   }
 
   updateStaffSkills(): void {
-    this.staffService.putStaffSkillsChange(this.staffService.currentStaff, this.staffID)
-      .subscribe(
-        data => console.log(data),
-        error => alert(error),
-        () => (this.openSnackBar(),
-          console.log('Update Staff Skills'))
-      )
+    let sortedInitialMentorSkills = this.initialMentorSkills.sort();
+    let sortedCurrentMentorSkills = this.staffService.currentStaff.mentorSkills.sort();
+    let sortedInitialMenteeSkills = this.initialMenteeSkills.sort();
+    let sortedCurrentMenteeSkills = this.staffService.currentStaff.menteeSkills.sort();
+
+    if (((sortedInitialMentorSkills.length == sortedCurrentMentorSkills.length) && (sortedInitialMentorSkills.every((v, i) => v === sortedCurrentMentorSkills[i]))) && ((sortedInitialMenteeSkills.length == sortedCurrentMenteeSkills.length) && (sortedInitialMenteeSkills.every((v, i) => v === sortedCurrentMenteeSkills[i])))) {
+      this.openSnackBar(false)
+    } else {
+      this.staffService.putStaffSkillsChange(this.staffService.currentStaff, this.staffID)
+        .subscribe(
+          data => console.log(data),
+          error => alert(error),
+          () => (this.openSnackBar(true),
+            this.initialMentorSkills = this.staffService.currentStaff.mentorSkills.slice(),
+            this.initialMenteeSkills = this.staffService.currentStaff.menteeSkills.slice(),
+            console.log('Update Staff Skills'))
+        )
+    }
   }
 
-  openSnackBar() {
+  openSnackBar(updated: boolean) {
     let config = new MdSnackBarConfig();
     config.duration = 1500;
-    this.snackBar.open("Skills have updated!", '', config);
+
+    if (updated == true) {
+      this.snackBar.open("Skills have updated!", '', config);
+    } else {
+      this.snackBar.open("No skills updated!", '', config);
+    }
   }
 }

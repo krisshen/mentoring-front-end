@@ -42,7 +42,7 @@ export class MentorComponent {
         this.staffService.currentStaff.mentorSkills.push(this.selectedSkill);
       }
 
-      newSkill = ""
+      newSkill = "";
     }
   }
 
