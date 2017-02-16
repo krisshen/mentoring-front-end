@@ -8,8 +8,12 @@
 <div class="app-content">
   <md-card class="app-input-section">
     <p>Update Categories</p>
-    <md-input placeholder="Category" [(ngModel)]="cate.value" #cate></md-input>
-    <md-input placeholder="Description" [(ngModel)]="desc.value" #desc></md-input>
+    <md-input-container>
+      <input mdInput placeholder="Category" [(ngModel)]="cate.value" #cate>
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Description" [(ngModel)]="desc.value" #desc>
+    </md-input-container>
     <button md-button (click)="upsertCategory(cate.value, desc.value); cate.value=''; desc.value=''">Submit</button>
     <div *ngIf="!categoryService.isAllCategoriesLoaded">
       <md-spinner></md-spinner>
@@ -28,8 +32,12 @@
   </md-card>
   <md-card class="app-input-section">
     <p>Update Skills</p>
-    <md-input placeholder="Skill"></md-input>
-    <md-input placeholder="Category"></md-input>
+    <md-input-container>
+      <input mdInput placeholder="Skill">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Category">
+    </md-input-container>
     <button md-button>Submit</button>
     <ul>
       <li *ngFor="let skill of this.allSkills">

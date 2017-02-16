@@ -44,7 +44,7 @@ import { MatchService } from './services/match.service';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     Ng2AutoCompleteModule
   ],
   entryComponents: [

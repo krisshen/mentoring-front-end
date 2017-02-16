@@ -28,18 +28,18 @@ export class LoginComponent {
     this.email = profile.getEmail()
     console.log('Logged in Email: ' + this.email);
 
-    if (this.email.endsWith('assurity.co.nz')) {
+    // if (this.email.endsWith('assurity.co.nz')) {
 
-      console.log('LoginComponent: Staff User logged in ')
+    console.log('LoginComponent: Staff User logged in ')
 
-      this.setLoginService(googleUser)
+    this.setLoginService(googleUser)
 
-      this.userName = this.loginService.userName;
-      this.imgUrl = this.loginService.userImageURL;
-      this.isLoggedIn = this.loginService.isLoggedIn();
+    this.userName = this.loginService.userName;
+    this.imgUrl = this.loginService.userImageURL;
+    this.isLoggedIn = this.loginService.isLoggedIn();
 
-      this.router.navigate(['/mentoring']);
-    }
+    this.router.navigate(['/mentoring']);
+    // }
   }
 
   private setLoginService(googleUser) {
