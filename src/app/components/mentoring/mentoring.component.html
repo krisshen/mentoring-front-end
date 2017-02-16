@@ -1,4 +1,4 @@
-<div *ngIf="!staffService.isStaffLoaded">
+<div *ngIf="!staffService.isStaffLoaded || isSubmitting">
   <md-progress-bar
     class="app-progress"
     mode="indeterminate">
@@ -12,7 +12,7 @@
 
 <md-grid-list cols="2">
   <md-grid-tile>
-    <md-card style="width: 60%">
+    <md-card style="width: 65%">
       <md-card-title align="center">
         As a Mentor
       </md-card-title>
@@ -22,7 +22,7 @@
     </md-card>
   </md-grid-tile>
   <md-grid-tile>
-    <md-card style="width: 60%">
+    <md-card style="width: 65%">
       <md-card-title align="center">
         As a Mentee
       </md-card-title>

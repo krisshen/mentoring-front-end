@@ -5,6 +5,7 @@ html, body {
   margin: 0;
   /* this forces the body tag to fill the height of the window */
   height: 100%;
+  width: 100%;
   /* font */
   font-family: 'Montserrat', sans-serif;
 }

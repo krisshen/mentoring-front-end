@@ -14,6 +14,7 @@ export class StaffService {
 
   private staffUrl = 'http://localhost:8080/staff/';
   private allStaffUrl = 'http://localhost:8080/allStaff';
+  private newStaffUrl = 'http://localhost:8080/newStaff/';
   private staffSkillsChangeUrl = 'http://localhost:8080/staffSkillsUpdate/';
   private matchUrl = 'http://localhost:8080/match';
 
@@ -53,6 +54,13 @@ export class StaffService {
 
     // return this.currentStaff
 
+  }
+
+  putNewUser(staff: Staff, id: string): Observable<any> {
+    return this.http
+      .post(this.newStaffUrl + id, JSON.stringify(staff), {headers: this.headers})
+      .map(res => res.json())
+      .catch((error:any) => Observable.throw('Server error'));
   }
 
   getAllStaff(): Observable<any> {
