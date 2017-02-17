@@ -18,7 +18,7 @@ import { Match } from "../../entities/match";
 })
 export class MenteeComponent {
 
-  constructor(private staffService: StaffService, private skillService: SkillService, private dialog: MdDialog) {
+  constructor(private dialog: MdDialog, private staffService: StaffService, private skillService: SkillService) {
     console.log('initializing mentee constructor')
   }
 

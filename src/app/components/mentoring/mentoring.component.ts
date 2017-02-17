@@ -67,6 +67,13 @@ export class MentoringComponent implements OnInit {
           () => (this.staffService.allStaffLoaded = true,
             console.log('Get All Staff Complete!'))
         );
+      this.matchService.getAllMatch(this.loginService.userName)
+        .subscribe(
+          data => (this.matchService.allMatch = data,
+            this.matchService.matchAmount = data.length),
+          error => alert(error),
+          () => (console.log('Get All Match Complete!'))
+        );
     }
   }
 

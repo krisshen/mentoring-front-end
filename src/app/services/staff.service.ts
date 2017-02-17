@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from "@angular/http";
 
-import {Observable} from "rxjs";
-import 'rxjs/add/operator/toPromise';
+import { Observable } from "rxjs";
 
-import {Staff} from "../entities/staff";
-import {Match} from "../entities/match";
+import { Staff } from "../entities/staff";
 
 
 @Injectable()
@@ -16,7 +14,6 @@ export class StaffService {
   private allStaffUrl = 'http://localhost:8080/allStaff';
   private newStaffUrl = 'http://localhost:8080/newStaff/';
   private staffSkillsChangeUrl = 'http://localhost:8080/staffSkillsUpdate/';
-  private matchUrl = 'http://localhost:8080/match';
 
   currentStaff: Staff;
   allStaff: Staff[];
@@ -71,13 +68,6 @@ export class StaffService {
   putStaffSkillsChange(staff: Staff, id: string): Observable<any> {
     return this.http
       .post(this.staffSkillsChangeUrl + id, JSON.stringify(staff), {headers: this.headers})
-      .map(res => res.json())
-      .catch((error:any) => Observable.throw('Server error'));
-  }
-
-  putMatch(match: Match): Observable<any> {
-    return this.http
-      .post(this.matchUrl, JSON.stringify(match), {headers: this.headers})
       .map(res => res.json())
       .catch((error:any) => Observable.throw('Server error'));
   }
