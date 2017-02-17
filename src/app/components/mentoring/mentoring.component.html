@@ -5,11 +5,6 @@
   </md-progress-bar>
 </div>
 
-<br>
-<div *ngIf="isAdmin">
-  <button md-raised-button color="primary" (click)="gotoAdmin()">ADMIN</button>
-</div>
-
 <md-grid-list cols="2">
   <md-grid-tile>
     <md-card style="width: 65%">
@@ -36,3 +31,10 @@
 <span class="app-action">
   <button md-fab (click)="updateStaffSkills()"><md-icon>check circle</md-icon></button>
 </span>
+
+<div *ngIf="isAdmin">
+  <span class="app-admin">
+    <button md-fab (click)="gotoAdmin()"><md-icon>people</md-icon></button>
+  </span>
+</div>
+

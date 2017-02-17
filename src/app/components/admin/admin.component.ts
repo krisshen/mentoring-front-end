@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {CategoryService} from "../../services/category.service";
 import {Category} from "../../entities/category";
 import {SkillService} from "../../services/skill.service";
@@ -13,7 +14,7 @@ import {MdDialog} from "@angular/material";
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private categoryService: CategoryService, private skillService: SkillService, private _dialog: MdDialog) { }
+  constructor(private router: Router, private categoryService: CategoryService, private skillService: SkillService, private _dialog: MdDialog) { }
 
   allCategories: Category[]
   allSkills: Skill[]
@@ -50,5 +51,9 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.lastDialogResult = result;
     })
+  }
+
+  gotoMain() {
+    this.router.navigate(['/mentoring']);
   }
 }

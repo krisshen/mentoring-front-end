@@ -82,10 +82,17 @@ export class MenteeComponent {
             </md-select>
             <p> Selected Mentor: {{selectedMentor}} </p>
             <button md-mini-fab (click)="save(selectedMentor)"><md-icon>check</md-icon></button>
-            <div *ngIf="(matches | matchFilter: skill).length > 0">
-              <p *ngFor="let match of (matches | matchFilter: skill)">
-                Your current mentor is: {{match.mentor}}
-              </p>
+            <div [ngSwitch]="matchService.isSubmitted">
+              <div *ngSwitchCase="true">
+                Refresh to view the update
+              </div>
+              <div *ngSwitchDefault>
+                <div *ngIf="(matches | matchFilter: skill).length > 0">
+                  <p *ngFor="let match of (matches | matchFilter: skill)">
+                    Your current mentor is: {{match.mentor}}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -104,9 +111,11 @@ export class MenteeDialog {
 
   save(mentor: string): void {
     if (!mentor) {
-      this.openSnackBar('novalue')
+      this.openSnackBar('noValue')
     } else if (mentor == this.mentee) {
-      this.openSnackBar('selfvalue')
+      this.openSnackBar('selfValue')
+    } else if (mentor == this.retrieveMatchMentor(this.matches, this.skill)) {
+      this.openSnackBar('sameValue')
     } else {
       this.matchService.isMatching = true;
       this.matchService.putMatch(new Match({'mentor': mentor, 'mentee': this.mentee, 'skill': this.skill}))
@@ -114,9 +123,18 @@ export class MenteeDialog {
           data => console.log(data),
           error => alert(error),
           () => (this.matchService.isMatching = false,
+            this.matchService.isSubmitted = true,
             this.openSnackBar('success'),
             this.dialogRef.close())
         );
+    }
+  }
+
+  retrieveMatchMentor(matches: Match[], skill: string): string {
+    for (let match of matches) {
+      if (match.skill == skill) {
+        return match.mentor
+      }
     }
   }
 
@@ -124,10 +142,12 @@ export class MenteeDialog {
     let config = new MdSnackBarConfig();
     config.duration = 1500;
 
-    if (situation == 'novalue') {
+    if (situation == 'noValue') {
       this.snackBar.open("Please select your mentor firstly!", '', config);
-    } else if (situation == 'selfvalue') {
+    } else if (situation == 'selfValue') {
       this.snackBar.open("Cannot select yourself!", '', config);
+    } else if (situation == 'sameValue') {
+      this.snackBar.open("Same mentor as now!", '', config);
     } else {
       this.snackBar.open("Mentor selected!", '', config);
     }

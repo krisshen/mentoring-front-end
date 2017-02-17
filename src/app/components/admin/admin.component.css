@@ -6,3 +6,10 @@
   margin: 20px;
   width: 40%;
 }
+
+.app-back {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
