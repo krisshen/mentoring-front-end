@@ -16,6 +16,7 @@ export class MatchService {
 
   allMatch: Match[];
   matchAmount: number;
+  isMatching: boolean = false;
 
   getAllMatch(name: string): Observable<any> {
     return this.http

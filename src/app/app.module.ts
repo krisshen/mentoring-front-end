@@ -22,6 +22,7 @@ import {CategoryService} from "./services/category.service";
 import { CategorydialogComponent } from './components/categorydialog/categorydialog.component';
 import { StaffFilterPipe } from './pipes/staff-filter.pipe';
 import { MatchService } from './services/match.service';
+import { MatchFilterPipe } from './pipes/match-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatchService } from './services/match.service';
     DialogContent,
     AdminComponent,
     CategorydialogComponent,
-    StaffFilterPipe
+    StaffFilterPipe,
+    MatchFilterPipe
   ],
   imports: [
     BrowserModule,

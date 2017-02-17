@@ -18,7 +18,7 @@ import { Match } from "../../entities/match";
 })
 export class MenteeComponent {
 
-  constructor(private dialog: MdDialog, private staffService: StaffService, private skillService: SkillService) {
+  constructor(private dialog: MdDialog, private staffService: StaffService, private skillService: SkillService, private matchService: MatchService) {
     console.log('initializing mentee constructor')
   }
 
@@ -60,6 +60,7 @@ export class MenteeComponent {
     let config = new MdDialogConfig();
     this.dialogRef = this.dialog.open(MenteeDialog, config);
     this.dialogRef.componentInstance.mentors = this.staffService.allStaff;
+    this.dialogRef.componentInstance.matches = this.matchService.allMatch;
     this.dialogRef.componentInstance.mentee = this.getCurrentStaff().name;
     this.dialogRef.componentInstance.skill = skill;
   }
@@ -71,19 +72,30 @@ export class MenteeComponent {
     <div [ngSwitch]="(mentors | staffFilter: skill:role).length">
       <div *ngSwitchCase="0">Oops, no mentors so far...</div>
       <div *ngSwitchDefault>
-        <md-select placeholder="Mentor" [(ngModel)]="selectedMentor" name="mentor">
-          <md-option *ngFor="let mentor of (mentors | staffFilter: skill:role)" [value]="mentor.name">
-            {{mentor.name}}
-          </md-option>
-        </md-select>
-        <p> Selected Mentor: {{selectedMentor}} </p>
-        <button md-mini-fab (click)="save(selectedMentor)"><md-icon>check</md-icon></button>
+        <div [ngSwitch]="matchService.isMatching">
+          <div *ngSwitchCase="true">
+            <md-spinner></md-spinner>
+          </div>
+          <div *ngSwitchDefault>
+            <md-select placeholder="Mentor" [(ngModel)]="selectedMentor" name="mentor">
+              <md-option *ngFor="let mentor of (mentors | staffFilter: skill:role)" [value]="mentor.name">{{mentor.name}}</md-option>
+            </md-select>
+            <p> Selected Mentor: {{selectedMentor}} </p>
+            <button md-mini-fab (click)="save(selectedMentor)"><md-icon>check</md-icon></button>
+            <div *ngIf="(matches | matchFilter: skill).length > 0">
+              <p *ngFor="let match of (matches | matchFilter: skill)">
+                Your current mentor is: {{match.mentor}}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   `,
 })
 export class MenteeDialog {
   mentors: Staff[];
+  matches: Match[];
   mentee: string;
   skill: string;
   role: 'mentor';
@@ -91,18 +103,33 @@ export class MenteeDialog {
   constructor(public dialogRef: MdDialogRef<MenteeDialog>, private matchService: MatchService, private snackBar: MdSnackBar) { }
 
   save(mentor: string): void {
-    this.matchService.putMatch(new Match({'mentor': mentor, 'mentee': this.mentee, 'skill': this.skill}))
-      .subscribe(
-        data => console.log(data),
-        error => alert(error),
-        () => (this.openSnackBar(),
-          this.dialogRef.close())
-      );
+    if (!mentor) {
+      this.openSnackBar('novalue')
+    } else if (mentor == this.mentee) {
+      this.openSnackBar('selfvalue')
+    } else {
+      this.matchService.isMatching = true;
+      this.matchService.putMatch(new Match({'mentor': mentor, 'mentee': this.mentee, 'skill': this.skill}))
+        .subscribe(
+          data => console.log(data),
+          error => alert(error),
+          () => (this.matchService.isMatching = false,
+            this.openSnackBar('success'),
+            this.dialogRef.close())
+        );
+    }
   }
 
-  openSnackBar() {
+  openSnackBar(situation: string) {
     let config = new MdSnackBarConfig();
     config.duration = 1500;
-    this.snackBar.open("Mentor selected!", '', config);
+
+    if (situation == 'novalue') {
+      this.snackBar.open("Please select your mentor firstly!", '', config);
+    } else if (situation == 'selfvalue') {
+      this.snackBar.open("Cannot select yourself!", '', config);
+    } else {
+      this.snackBar.open("Mentor selected!", '', config);
+    }
   }
 }
