@@ -6,49 +6,73 @@
 </div>
 
 <div class="app-content">
-  <md-card class="app-input-section">
-    <p>Update Categories</p>
-    <md-input-container>
-      <input mdInput placeholder="Category" [(ngModel)]="cate.value" #cate>
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Description" [(ngModel)]="desc.value" #desc>
-    </md-input-container>
-    <button md-button (click)="upsertCategory(cate.value, desc.value); cate.value=''; desc.value=''">Submit</button>
-    <div *ngIf="!categoryService.isAllCategoriesLoaded">
-      <md-spinner></md-spinner>
-    </div>
-    <div *ngIf="categoryService.isAllCategoriesLoaded">
-      <ul>
-        <li *ngFor="let category of allCategories">
-          <button md-button (click)="openCategoryDialog(category.id)" md-tooltip={{category.description}}>{{category.name}}</button>
-          <!--<button class="delete"-->
-          <!--(click)="removeMentorSkill(skill); $event.stopPropagation()">x-->
-          <!--</button>-->
-        </li>
-        <!--{{newSkill.value}}-->
-      </ul>
-    </div>
-  </md-card>
-  <md-card class="app-input-section">
-    <p>Update Skills</p>
-    <md-input-container>
-      <input mdInput placeholder="Skill">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Category">
-    </md-input-container>
-    <button md-button>Submit</button>
-    <ul>
-      <li *ngFor="let skill of this.allSkills">
-        <button md-button md-tooltip={{skill.categoryID}}>{{skill.name}}</button>
-        <!--<button class="delete"-->
-        <!--(click)="removeMentorSkill(skill); $event.stopPropagation()">x-->
-        <!--</button>-->
-      </li>
-      <!--{{newSkill.value}}-->
-    </ul>
-  </md-card>
+  <md-grid-list cols="2">
+    <md-grid-tile
+      [colspan]="1"
+      [rowspan]="1">
+      <md-card class="app-input-section" style="width: 85%; height: 85%">
+        <md-card-header>
+          <md-card-title>Update Categories</md-card-title>
+        </md-card-header>
+        <md-card-content>
+          <md-input-container>
+            <input mdInput placeholder="Category" [(ngModel)]="cate.value" #cate>
+          </md-input-container>
+          <md-input-container>
+            <input mdInput placeholder="Description" [(ngModel)]="desc.value" #desc>
+          </md-input-container>
+          <button md-button (click)="upsertCategory(cate.value, desc.value); cate.value=''; desc.value=''">Submit</button>
+          <div *ngIf="!categoryService.isAllCategoriesLoaded">
+            <md-spinner></md-spinner>
+          </div>
+          <div *ngIf="categoryService.isAllCategoriesLoaded">
+            <ul>
+              <li *ngFor="let category of allCategories">
+                <button md-button (click)="openCategoryDialog(category.id)" md-tooltip={{category.description}} style="text-align: left">
+                  {{category.name}}
+                </button>
+              </li>
+            </ul>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-grid-tile>
+    <md-grid-tile
+      [colspan]="1"
+      [rowspan]="2">
+      <md-card style="width: 95%; height: 92.5%">
+        <md-card-header>
+          <md-card-title>Match Status</md-card-title>
+        </md-card-header>
+        <md-card-content>
+          <h1>Hello</h1>
+        </md-card-content>
+      </md-card>
+    </md-grid-tile>
+    <md-grid-tile
+      [colspan]="1"
+      [rowspan]="1">
+      <md-card class="app-input-section" style="width: 85%; height: 85%">
+        <md-card-header>
+          <md-card-title>Update Skills</md-card-title>
+        </md-card-header>
+        <md-card-content style="height: 500px; overflow-y: auto">
+          <md-input-container>
+            <input mdInput placeholder="Skill">
+          </md-input-container>
+          <md-input-container>
+            <input mdInput placeholder="Category">
+          </md-input-container>
+          <button md-button>Submit</button>
+          <ul>
+            <li *ngFor="let skill of this.allSkills">
+              <button md-button md-tooltip={{skill.categoryID}} style="text-align: left">{{skill.name}}</button>
+            </li>
+          </ul>
+        </md-card-content>
+      </md-card>
+    </md-grid-tile>
+  </md-grid-list>
 </div>
 
 <span class="app-back">
