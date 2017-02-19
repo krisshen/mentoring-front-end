@@ -1,5 +1,6 @@
-import {Component, NgZone} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+
 import {LoginService} from '../../services/login.service';
 
 declare var gapi: any;
@@ -20,26 +21,26 @@ export class LoginComponent {
   isLoggedIn: boolean = false;
   userName = '';
   imgUrl = '';
-  email = ''
+  email = '';
 
   public onSignIn(googleUser): void {
 
-    var profile = googleUser.getBasicProfile()
-    this.email = profile.getEmail()
+    var profile = googleUser.getBasicProfile();
+    this.email = profile.getEmail();
     console.log('Logged in Email: ' + this.email);
 
-    // if (this.email.endsWith('assurity.co.nz')) {
+    if (this.email.endsWith('assurity.co.nz')) {
 
-    console.log('LoginComponent: Staff User logged in ')
+      console.log('LoginComponent: Staff User logged in ')
 
-    this.setLoginService(googleUser)
+      this.setLoginService(googleUser)
 
-    this.userName = this.loginService.userName;
-    this.imgUrl = this.loginService.userImageURL;
-    this.isLoggedIn = this.loginService.isLoggedIn();
+      this.userName = this.loginService.userName;
+      this.imgUrl = this.loginService.userImageURL;
+      this.isLoggedIn = this.loginService.isLoggedIn();
 
-    this.router.navigate(['/mentoring']);
-    // }
+      this.router.navigate(['/mentoring']);
+    }
   }
 
   private setLoginService(googleUser) {

@@ -85,7 +85,7 @@ export class MentoringComponent implements OnInit {
     if (error.status = 500) {
       this.newStaff = new Staff({'id': this.staffID, 'name': this.loginService.userName, 'email': this.loginService.userEmail, 'mentorSkills': [], 'menteeSkills': []});
 
-      this.staffService.putNewUser(this.newStaff, this.staffID)
+      this.staffService.putNewStaff(this.newStaff, this.staffID)
         .subscribe(
           data => console.log(data),
           error => alert(error),

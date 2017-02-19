@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, trigger, state, style, transition, animate } from '@angular/core';
 
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
@@ -14,7 +14,19 @@ import { Match } from "../../entities/match";
 @Component({
   selector: 'mentee',
   templateUrl: 'mentee.component.html',
-  styleUrls: ['mentee.component.css']
+  styleUrls: ['mentee.component.css'],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({transform: 'translateX(0)'})),
+      transition('void => *', [
+        style({transform: 'translateX(-100%)'}),
+        animate(200)
+      ]),
+      transition('* => void', [
+        animate(200, style({transform: 'translateX(100%)'}))
+      ])
+    ])
+  ]
 })
 export class MenteeComponent {
 

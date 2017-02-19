@@ -15,30 +15,23 @@ export class SkillService {
 
   allSkills: Skill[];
   allSkillsName: string[] = [];
-
+  skillsByCategoryID: Skill[];
 
   getAllSkills(): Observable<any> {
-    console.log('SkillService.getAllSkills ...');
-
     return this.http
       .get(this.skillsUrl)
       .map(res => res.json())
+      .catch((error: any) => Observable.throw('getAllSkills error'));
   }
 
   getAllSkillsName(): void {
-      for (let skill of this.allSkills) {
+    for (let skill of this.allSkills) {
       this.allSkillsName.push(skill.name)
     }
   }
 
-  getSelectedSkill(skillName: string): Skill {
-    return this.allSkills.find(skill => skill.name == skillName)
-  }
-
-  skillsByCategoryID: Skill[]
   getSkillsByCategoryID(category_id: string): Skill[] {
-
-    this.skillsByCategoryID = this.allSkills.filter(skill => skill.categoryID == category_id)
+    this.skillsByCategoryID = this.allSkills.filter(skill => skill.categoryID == category_id);
     return this.skillsByCategoryID
   }
 }

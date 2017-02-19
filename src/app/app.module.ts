@@ -14,7 +14,6 @@ import {LoginComponent} from './components/login/login.component';
 import {MenteeComponent, MenteeDialog} from './components/mentee/mentee.component';
 import {MentorComponent, MentorDialog} from './components/mentor/mentor.component';
 import {MentoringComponent} from './components/mentoring/mentoring.component';
-import {PlaceHolderComponent, DialogContent} from './components/placeholder/placeholder.component';
 import {LoginService} from "./services/login.service";
 import {HttpService} from "./services/http.service";
 import {AdminComponent} from './components/admin/admin.component';
@@ -34,8 +33,6 @@ import { MatchFilterPipe } from './pipes/match-filter.pipe';
     MentorComponent,
     MentorDialog,
     MentoringComponent,
-    PlaceHolderComponent,
-    DialogContent,
     AdminComponent,
     CategorydialogComponent,
     StaffFilterPipe,
@@ -52,8 +49,6 @@ import { MatchFilterPipe } from './pipes/match-filter.pipe';
   entryComponents: [
     MentorDialog,
     MenteeDialog,
-    PlaceHolderComponent,
-    DialogContent,
     CategorydialogComponent
   ],
   providers: [CategoryService, SkillService, StaffService, LoginService, HttpService, MatchService],

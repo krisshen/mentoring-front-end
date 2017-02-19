@@ -1,17 +1,17 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export class LoginService {
 
   constructor() {}
 
-  adminFlag = false
-  loginFlag = false
-  userID: string
-  userIDToken: string
-  userName: string
-  userEmail: string
-  userImageURL: string
+  adminFlag = false;
+  loginFlag = false;
+  userID: string;
+  userIDToken: string;
+  userName: string;
+  userEmail: string;
+  userImageURL: string;
 
   setAdminFlag(flag: boolean) {
     this.adminFlag = flag

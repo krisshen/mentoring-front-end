@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, trigger, state, style, transition, animate } from '@angular/core';
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 
 import { StaffService } from "../../services/staff.service";
@@ -10,7 +10,19 @@ import { Staff } from '../../entities/staff';
 @Component({
   selector: 'mentor',
   templateUrl: 'mentor.component.html',
-  styleUrls: ['mentor.component.css']
+  styleUrls: ['mentor.component.css'],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({transform: 'translateX(0)'})),
+      transition('void => *', [
+        style({transform: 'translateX(-100%)'}),
+        animate(200)
+      ]),
+      transition('* => void', [
+        animate(200, style({transform: 'translateX(100%)'}))
+      ])
+    ])
+  ]
 })
 export class MentorComponent {
 

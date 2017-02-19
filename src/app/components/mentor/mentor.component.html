@@ -14,13 +14,13 @@
 <div [ngSwitch]="staffService.isStaffLoaded && staffService.allStaffLoaded">
   <div *ngSwitchCase="true">
     <ul>
-      <li *ngFor="let skill of getCurrentStaff().mentorSkills">
+      <li *ngFor="let skill of getCurrentStaff().mentorSkills"
+          [@flyInOut]="newSkill.value">
         <button md-button (click)="retrieveMentees(skill)" style="text-align: left">{{skill}}</button>
         <button class="delete"
                 (click)="removeMentorSkill(skill); $event.stopPropagation()">x
         </button>
       </li>
-      {{newSkill.value}}
     </ul>
   </div>
   <div *ngSwitchDefault>
