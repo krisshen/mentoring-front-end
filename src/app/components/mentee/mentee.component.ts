@@ -30,7 +30,7 @@ import { Match } from "../../entities/match";
 })
 export class MenteeComponent {
 
-  constructor(private dialog: MdDialog, private staffService: StaffService, private skillService: SkillService, private matchService: MatchService) {
+  constructor(private dialog: MdDialog, private staffService: StaffService, private skillService: SkillService, private matchService: MatchService, private snackBar: MdSnackBar) {
     console.log('initializing mentee constructor')
   }
 
@@ -65,7 +65,21 @@ export class MenteeComponent {
 
   removeMenteeSkill(skill: string) {
     console.log('deleting mentee skill: ' + skill);
-    this.staffService.currentStaff.menteeSkills = this.staffService.currentStaff.menteeSkills.filter(menteeskill => menteeskill != skill)
+
+    for (let item of this.matchService.allMatch) {
+      if (skill == item.skill) {
+        this.matchService.deleteMatch(item.mentor, item.mentee, skill)
+          .subscribe(
+            data => (console.log(data),
+              this.openSnackBar()),
+            error => alert(error),
+            () => (console.log('Delete match status: ' + skill),
+              this.matchService.isSubmitted == true)
+          )
+      }
+    }
+
+    this.staffService.currentStaff.menteeSkills = this.staffService.currentStaff.menteeSkills.filter(menteeskill => menteeskill != skill);
   }
 
   retrieveMentors(skill: string): void {
@@ -75,6 +89,12 @@ export class MenteeComponent {
     this.dialogRef.componentInstance.matches = this.matchService.allMatch;
     this.dialogRef.componentInstance.mentee = this.getCurrentStaff().name;
     this.dialogRef.componentInstance.skill = skill;
+  }
+
+  openSnackBar() {
+    let config = new MdSnackBarConfig();
+    config.duration = 1500;
+    this.snackBar.open("Match deleted!", '', config);
   }
 }
 
