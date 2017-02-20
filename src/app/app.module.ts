@@ -22,6 +22,8 @@ import { CategorydialogComponent } from './components/categorydialog/categorydia
 import { StaffFilterPipe } from './pipes/staff-filter.pipe';
 import { MatchService } from './services/match.service';
 import { MatchFilterPipe } from './pipes/match-filter.pipe';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { MatchFilterPipe } from './pipes/match-filter.pipe';
     HttpModule,
     AppRoutingModule,
     MaterialModule,
-    Ng2AutoCompleteModule
+    Ng2AutoCompleteModule,
+    NgxDatatableModule
   ],
   entryComponents: [
     MentorDialog,

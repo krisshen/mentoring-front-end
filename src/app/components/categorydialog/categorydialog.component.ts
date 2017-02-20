@@ -1,7 +1,8 @@
-import {Component, Optional, OnInit} from '@angular/core';
-import {MdDialogRef} from "@angular/material";
-import {SkillService} from "../../services/skill.service";
-import {Skill} from "../../entities/skill";
+import { Component, OnInit } from '@angular/core';
+
+import { SkillService } from "../../services/skill.service";
+
+import { Skill } from "../../entities/skill";
 
 @Component({
   selector: 'app-categorydialog',
@@ -10,9 +11,9 @@ import {Skill} from "../../entities/skill";
 })
 export class CategorydialogComponent implements OnInit{
 
-  constructor(@Optional() public dialogRef: MdDialogRef<CategorydialogComponent>, private skillService: SkillService) { }
+  constructor(private skillService: SkillService) { }
 
-  skillsByCategoryID: Skill[]
+  skillsByCategoryID: Skill[];
 
   ngOnInit() {
     this.skillsByCategoryID = this.skillService.skillsByCategoryID

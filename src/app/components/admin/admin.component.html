@@ -22,17 +22,19 @@
             <input mdInput placeholder="Description" [(ngModel)]="desc.value" #desc>
           </md-input-container>
           <button md-button (click)="upsertCategory(cate.value, desc.value); cate.value=''; desc.value=''">Submit</button>
-          <div *ngIf="!categoryService.isAllCategoriesLoaded">
-            <md-spinner></md-spinner>
-          </div>
-          <div *ngIf="categoryService.isAllCategoriesLoaded">
-            <ul>
-              <li *ngFor="let category of allCategories">
-                <button md-button (click)="openCategoryDialog(category.id)" md-tooltip={{category.description}} style="text-align: left">
-                  {{category.name}}
-                </button>
-              </li>
-            </ul>
+          <div [ngSwitch]="categoryService.isAllCategoriesLoaded">
+            <div *ngSwitchCase="false">
+              <md-spinner></md-spinner>
+            </div>
+            <div *ngSwitchDefault>
+              <ul>
+                <li *ngFor="let category of allCategories">
+                  <button md-button (click)="openCategoryDialog(category.id)" md-tooltip={{category.description}} style="text-align: left">
+                    {{category.name}}
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </md-card-content>
       </md-card>
@@ -40,12 +42,20 @@
     <md-grid-tile
       [colspan]="1"
       [rowspan]="2">
-      <md-card style="width: 95%; height: 92.5%">
+      <md-card style="width: 85%; height: 92.5%">
         <md-card-header>
           <md-card-title>Match Status</md-card-title>
         </md-card-header>
         <md-card-content>
-          <h1>Hello</h1>
+          <ngx-datatable
+            class="material striped"
+            [rows]="rows"
+            [columns]="columns"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="50">
+          </ngx-datatable>
         </md-card-content>
       </md-card>
     </md-grid-tile>
