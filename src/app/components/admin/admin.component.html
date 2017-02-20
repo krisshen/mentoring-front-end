@@ -46,7 +46,7 @@
         <md-card-header>
           <md-card-title>Match Status</md-card-title>
         </md-card-header>
-        <md-card-content>
+        <md-card-content style="height: 93%; overflow-y: auto">
           <ngx-datatable
             class="material striped"
             [rows]="rows"
@@ -67,13 +67,13 @@
           <md-card-title>Update Skills</md-card-title>
         </md-card-header>
         <md-card-content style="height: 500px; overflow-y: auto">
-          <md-input-container>
-            <input mdInput placeholder="Skill">
-          </md-input-container>
-          <md-input-container>
-            <input mdInput placeholder="Category">
-          </md-input-container>
-          <button md-button>Submit</button>
+          <!--<md-input-container>-->
+            <!--<input mdInput placeholder="Skill">-->
+          <!--</md-input-container>-->
+          <!--<md-input-container>-->
+            <!--<input mdInput placeholder="Category">-->
+          <!--</md-input-container>-->
+          <!--<button md-button>Submit</button>-->
           <ul>
             <li *ngFor="let skill of this.allSkills">
               <button md-button md-tooltip={{skill.categoryID}} style="text-align: left">{{skill.name}}</button>
