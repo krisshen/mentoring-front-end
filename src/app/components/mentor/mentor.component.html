@@ -1,18 +1,18 @@
-<br>I can teach
-<md-input-container>
-  <input mdInput
-         ng2-auto-complete
-         type="search"
-         placeholder="a skill"
-         [(ngModel)]="newSkill.value"
-         [source]="skillService.allSkillsName"
-         #newSkill>
-</md-input-container>
-<button md-mini-fab (click)="addMentorSkill(newSkill.value); newSkill.value=''">
-  <md-icon>add</md-icon>
-</button>
 <div [ngSwitch]="staffService.isStaffLoaded && staffService.allStaffLoaded">
   <div *ngSwitchCase="true">
+    <br>I can teach
+    <md-input-container>
+      <input mdInput
+             ng2-auto-complete
+             type="search"
+             placeholder="a skill"
+             [(ngModel)]="newSkill.value"
+             [source]="skillService.allSkillsName"
+             #newSkill>
+    </md-input-container>
+    <button md-mini-fab (click)="addMentorSkill(newSkill.value); newSkill.value=''">
+      <md-icon>add</md-icon>
+    </button>
     <ul>
       <li *ngFor="let skill of getCurrentStaff().mentorSkills"
           [@flyInOut]="newSkill.value">

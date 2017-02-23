@@ -49,7 +49,7 @@ export class MentoringComponent implements OnInit {
             this.initialMentorSkills = data.mentorSkills.slice(),
             this.initialMenteeSkills = data.menteeSkills.slice()),
           error => (console.log('****************' + error),
-            this.upsertNewStaff(error)),
+            this.upsertNewStaff()),
           () => (this.staffService.isStaffLoaded = true,
             console.log('Get Request Complete!'))
         );
@@ -81,24 +81,24 @@ export class MentoringComponent implements OnInit {
     this.router.navigate(['/admin']);
   }
 
-  upsertNewStaff(error: any): void {
-    if (error.status = 500) {
-      this.newStaff = new Staff({'id': this.staffID, 'name': this.loginService.userName, 'email': this.loginService.userEmail, 'mentorSkills': [], 'menteeSkills': []});
+  upsertNewStaff(): void {
+    // if (error.status = 500) {
+    this.newStaff = new Staff({'id': this.staffID, 'name': this.loginService.userName, 'email': this.loginService.userEmail, 'mentorSkills': [], 'menteeSkills': []});
 
-      this.staffService.putNewStaff(this.newStaff, this.staffID)
-        .subscribe(
-          data => console.log(data),
-          error => alert(error),
-          () => (
-            this.staffService.currentStaff = this.newStaff,
-            this.initialMentorSkills = this.staffService.currentStaff.mentorSkills.slice(),
-            this.initialMenteeSkills = this.staffService.currentStaff.menteeSkills.slice(),
-            this.openSnackBar('staff', true),
-            this.staffService.isStaffLoaded = true)
-        );
-    } else {
-      alert('Oops... something went wrong!!!')
-    }
+    this.staffService.putNewStaff(this.newStaff, this.staffID)
+      .subscribe(
+        data => console.log(data),
+        error => alert(error),
+        () => (
+          this.staffService.currentStaff = this.newStaff,
+          this.initialMentorSkills = this.staffService.currentStaff.mentorSkills.slice(),
+          this.initialMenteeSkills = this.staffService.currentStaff.menteeSkills.slice(),
+          this.openSnackBar('staff', true),
+          this.staffService.isStaffLoaded = true)
+      );
+    // } else {
+    //   alert('Oops... something went wrong!!!')
+    // }
   }
 
   updateStaffSkills(): void {
