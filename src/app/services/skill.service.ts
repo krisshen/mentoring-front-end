@@ -8,7 +8,8 @@ import { Skill } from "../entities/skill";
 
 @Injectable()
 export class SkillService {
-  private skillsUrl = 'http://localhost:8080/skills';
+  private skillsUrl = '/skills';
+  // private skillsUrl = 'http://localhost:8080/skills';
 
   constructor(private http: Http) {
   }

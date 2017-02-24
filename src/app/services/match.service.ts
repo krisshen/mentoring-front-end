@@ -10,9 +10,12 @@ import { Match } from "../entities/match";
 export class MatchService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  private allMatchUrl = 'http://localhost:8080/allMatch/';
-  private matchChangeUrl = 'http://localhost:8080/match';
-  private matchDeleteUrl = 'http://localhost:8080/deleteMatch/';
+  // private allMatchUrl = 'http://localhost:8080/allMatch/';
+  // private matchChangeUrl = 'http://localhost:8080/match';
+  // private matchDeleteUrl = 'http://localhost:8080/deleteMatch/';
+  private allMatchUrl = '/allMatch/';
+  private matchChangeUrl = '/match';
+  private matchDeleteUrl = '/deleteMatch/';
 
   constructor(private http: Http) { }
 

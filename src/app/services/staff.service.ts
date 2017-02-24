@@ -10,10 +10,14 @@ import { Staff } from "../entities/staff";
 export class StaffService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  private staffUrl = 'http://localhost:8080/staff/';
-  private allStaffUrl = 'http://localhost:8080/allStaff';
-  private newStaffUrl = 'http://localhost:8080/newStaff/';
-  private staffSkillsChangeUrl = 'http://localhost:8080/staffSkillsUpdate/';
+  // private staffUrl = 'http://localhost:8080/staff/';
+  // private allStaffUrl = 'http://localhost:8080/allStaff';
+  // private newStaffUrl = 'http://localhost:8080/newStaff/';
+  // private staffSkillsChangeUrl = 'http://localhost:8080/staffSkillsUpdate/';
+  private staffUrl = '/staff/';
+  private allStaffUrl = '/allStaff';
+  private newStaffUrl = '/newStaff/';
+  private staffSkillsChangeUrl = '/staffSkillsUpdate/';
 
   currentStaff: Staff;
   allStaff: Staff[];

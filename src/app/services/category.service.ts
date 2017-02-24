@@ -8,8 +8,10 @@ import { Category } from "../entities/category";
 @Injectable()
 export class CategoryService {
 
-  private allCategoriesUrl = 'http://localhost:8080/categories';
-  private upsertCategoryUrl = 'http://localhost:8080/category/';
+  // private allCategoriesUrl = 'http://localhost:8080/categories';
+  // private upsertCategoryUrl = 'http://localhost:8080/category/';
+  private allCategoriesUrl = '/categories';
+  private upsertCategoryUrl = '/category/';
 
   isAllCategoriesLoaded: boolean = false;
 
