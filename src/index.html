@@ -10,20 +10,41 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+  <!--Google Sign In Starts-->
   <meta name="google-signin-client_id"
         content="129789007158-9ejterdg3mv5slq2s3tcf0eqgg0pnfbo.apps.googleusercontent.com">
 
   <script>
-    window.onLoadCallback = function () {
-      gapi.auth2.init({
-        client_id: "129789007158-9ejterdg3mv5slq2s3tcf0eqgg0pnfbo.apps.googleusercontent.com"
-      })
-    };
+    //  function onSuccess(googleUser) {
+    //    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    //  }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('sign-in-button', {
+        'scope': 'profile email',
+        'width': 170,
+        'height': 36,
+        'longtitle': true,
+        'theme': 'light',
+        'onsuccess': onSignIn,
+        'onfailure': onFailure
+      });
+    }
   </script>
+  <!--<script>-->
+    <!--window.onLoadCallback = function () {-->
+      <!--gapi.auth2.init({-->
+        <!--client_id: "129789007158-9ejterdg3mv5slq2s3tcf0eqgg0pnfbo.apps.googleusercontent.com"-->
+      <!--})-->
+    <!--};-->
+  <!--</script>-->
+  <!--Google Sign In Ends-->
   <script src="https://cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <div id="particles-js" style="position:absolute; top: 0; z-index: -1; width: 100%;height: 100%;">
   <canvas class="particles-js-canvas-el" width="1303" height="960" style="width: 100%; height: 100%;"></canvas>
 </div>

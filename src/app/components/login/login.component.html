@@ -1,6 +1,7 @@
 <div [ngSwitch]="isLoggedIn">
   <div *ngSwitchCase="false">
-    <button md-button class="g-signin2" data-onsuccess="onSignIn"></button>
+    <!--<button md-button class="g-signin2" data-onsuccess="onSignIn"></button>-->
+    <div id="sign-in-button"></div>
   </div>
   <div *ngSwitchDefault>
     Welcome {{userName}}
@@ -13,3 +14,4 @@
     </a>
   </div>
 </div>
+
