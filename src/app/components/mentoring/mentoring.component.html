@@ -28,9 +28,13 @@
   </md-grid-tile>
 </md-grid-list>
 
-<span class="app-action">
-  <button md-fab (click)="updateStaffSkills()"><md-icon>check circle</md-icon></button>
-</span>
+<div *ngIf="staffService.isStaffLoaded">
+  <div *ngIf="detectSkillsChange()">
+    <span class="app-action">
+      <button md-fab (click)="updateStaffSkills()"><md-icon>check circle</md-icon></button>
+    </span>
+  </div>
+</div>
 
 <div *ngIf="isAdmin">
   <span class="app-admin">

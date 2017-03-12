@@ -101,6 +101,19 @@ export class MentoringComponent implements OnInit {
     // }
   }
 
+  detectSkillsChange(): boolean {
+    let sortedInitialMentorSkills = this.initialMentorSkills.sort();
+    let sortedCurrentMentorSkills = this.staffService.currentStaff.mentorSkills.sort();
+    let sortedInitialMenteeSkills = this.initialMenteeSkills.sort();
+    let sortedCurrentMenteeSkills = this.staffService.currentStaff.menteeSkills.sort();
+
+    if (((sortedInitialMentorSkills.length == sortedCurrentMentorSkills.length) && (sortedInitialMentorSkills.every((v, i) => v === sortedCurrentMentorSkills[i]))) && ((sortedInitialMenteeSkills.length == sortedCurrentMenteeSkills.length) && (sortedInitialMenteeSkills.every((v, i) => v === sortedCurrentMenteeSkills[i])))) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   updateStaffSkills(): void {
     let sortedInitialMentorSkills = this.initialMentorSkills.sort();
     let sortedCurrentMentorSkills = this.staffService.currentStaff.mentorSkills.sort();
