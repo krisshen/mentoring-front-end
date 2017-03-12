@@ -1,7 +1,8 @@
 import { Component, trigger, state, style, transition, animate } from '@angular/core';
-
+import { FormControl } from '@angular/forms';
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
 import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+import 'rxjs/add/operator/startWith';
 
 import { StaffService } from "../../services/staff.service";
 import { SkillService } from "../../services/skill.service";
@@ -29,14 +30,23 @@ import { Match } from "../../entities/match";
   ]
 })
 export class MenteeComponent {
-
   constructor(private dialog: MdDialog, private staffService: StaffService, private skillService: SkillService, private matchService: MatchService, private snackBar: MdSnackBar) {
-    console.log('initializing mentee constructor')
+    console.log('initializing mentee constructor');
+    this.skillCtrl = new FormControl();
+    this.filteredSkills = this.skillCtrl.valueChanges
+      .startWith(null)
+      .map(name => this.filterSkills(name));
   }
 
   selectedSkill: string;
   selectedMentor: string;
   dialogRef:MdDialogRef<MenteeDialog>;
+  skillCtrl: FormControl;
+  filteredSkills: any;
+
+  filterSkills(val: string) {
+    return val ? this.skillService.allSkillsName.filter((s) => new RegExp(val, 'gi').test(s)) : this.skillService.allSkillsName;
+  }
 
   getCurrentStaff(): Staff {
     return this.staffService.currentStaff

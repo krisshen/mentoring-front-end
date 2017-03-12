@@ -1,18 +1,22 @@
 <div [ngSwitch]="staffService.isStaffLoaded && staffService.allStaffLoaded">
   <div *ngSwitchCase="true">
     <br>I want to learn
-    <md-input-container>
+    <md-input-container class="full-width">
       <input mdInput
-             ng2-auto-complete
              type="search"
              placeholder="a skill"
              [(ngModel)]="newSkill.value"
-             [source]="skillService.allSkillsName"
+             [mdAutocomplete]="auto"
+             [formControl]="skillCtrl"
+             (keyup.enter)="addMenteeSkill(newSkill.value); newSkill.value=''"
+             (blur)="addMenteeSkill(newSkill.value); newSkill.value=''"
              #newSkill>
     </md-input-container>
-    <button md-mini-fab (click)="addMenteeSkill(newSkill.value); newSkill.value=''">
-      <md-icon>add</md-icon>
-    </button>
+    <md-autocomplete #auto="mdAutocomplete">
+      <md-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+        {{skill}}
+      </md-option>
+    </md-autocomplete>
     <ul>
       <li *ngFor="let skill of getCurrentStaff().menteeSkills"
           [@flyInOut]="newSkill.value">

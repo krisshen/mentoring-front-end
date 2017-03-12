@@ -1,5 +1,7 @@
 import { Component, trigger, state, style, transition, animate } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MdDialog, MdDialogConfig, MdDialogRef } from '@angular/material';
+import 'rxjs/add/operator/startWith';
 
 import { StaffService } from "../../services/staff.service";
 import { SkillService } from "../../services/skill.service";
@@ -25,13 +27,22 @@ import { Staff } from '../../entities/staff';
   ]
 })
 export class MentorComponent {
-
   constructor(private staffService: StaffService, private skillService: SkillService, private dialog: MdDialog) {
-    console.log('initializing mentor constructor')
+    console.log('initializing mentor constructor');
+    this.skillCtrl = new FormControl();
+    this.filteredSkills = this.skillCtrl.valueChanges
+      .startWith(null)
+      .map(name => this.filterSkills(name));
   }
 
   selectedSkill: string;
   dialogRef:MdDialogRef<MentorDialog>;
+  skillCtrl: FormControl;
+  filteredSkills: any;
+
+  filterSkills(val: string) {
+    return val ? this.skillService.allSkillsName.filter((s) => new RegExp(val, 'gi').test(s)) : this.skillService.allSkillsName;
+  }
 
   getCurrentStaff(): Staff {
     return this.staffService.currentStaff
