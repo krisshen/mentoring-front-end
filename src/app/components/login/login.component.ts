@@ -1,9 +1,9 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {LoginService} from '../../services/login.service';
+import { LoginService } from '../../services/login.service';
 
-declare var gapi: any;
+declare let gapi: any;
 
 @Component({
   selector: 'app-login',
@@ -24,29 +24,28 @@ export class LoginComponent {
   email = '';
 
   public onSignIn(googleUser): void {
-
-    var profile = googleUser.getBasicProfile();
+    let profile = googleUser.getBasicProfile();
     this.email = profile.getEmail();
     console.log('Logged in Email: ' + this.email);
 
     if (this.email.endsWith('assurity.co.nz')) {
+      console.log('LoginComponent: Staff User logged in');
 
-      console.log('LoginComponent: Staff User logged in ')
-
-      this.setLoginService(googleUser)
-
+      this.setLoginService(googleUser);
       this.userName = this.loginService.userName;
       this.imgUrl = this.loginService.userImageURL;
       this.isLoggedIn = this.loginService.isLoggedIn();
 
       this.router.navigate(['/mentoring']);
+    } else {
+      console.log('LoginComponent: Non-assurity logged in');
+      alert('Please login with your Assurity account');
     }
   }
 
   private setLoginService(googleUser) {
-
-    var profile = googleUser.getBasicProfile();
-    var id_token = googleUser.getAuthResponse().id_token;
+    let profile = googleUser.getBasicProfile();
+    let id_token = googleUser.getAuthResponse().id_token;
 
     console.log('ID token: ' + id_token);
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -67,7 +66,7 @@ export class LoginComponent {
   }
 
   public signOut(): void {
-    var auth2 = gapi.auth2.getAuthInstance();
+    let auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
       console.log('User signed out.');
     });
