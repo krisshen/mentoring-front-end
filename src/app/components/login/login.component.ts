@@ -38,7 +38,8 @@ export class LoginComponent {
 
       this.router.navigate(['/mentoring']);
     } else {
-      console.log('LoginComponent: Non-assurity logged in');
+      console.log('LoginComponent: Non-assurity User logged in');
+      this.signOut();
       alert('Please login with your Assurity account');
     }
   }
