@@ -1,17 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-
-import { Observable } from "rxjs";
-
-import { Skill } from "../entities/skill";
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {Observable} from "rxjs";
+import {Skill} from "../entities/skill";
+import {environment} from 'app/../environments/environment';
 
 
 @Injectable()
 export class SkillService {
-  private skillsUrl = '/skills';
+  private skillsUrl// = '/skills';
   // private skillsUrl = 'http://localhost:8080/skills';
 
   constructor(private http: Http) {
+    if (environment.production) {
+      this.skillsUrl = '/skills'
+    }
+    else {
+      this.skillsUrl = 'http://localhost:8080/skills'
+    }
   }
 
   allSkills: Skill[];

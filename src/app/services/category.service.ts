@@ -1,21 +1,28 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
-
-import { Observable } from "rxjs";
-
-import { Category } from "../entities/category";
+import {Injectable} from '@angular/core';
+import {Headers, Http} from '@angular/http';
+import {Observable} from "rxjs";
+import {Category} from "../entities/category";
+import {environment} from 'app/../environments/environment';
 
 @Injectable()
 export class CategoryService {
 
   // private allCategoriesUrl = 'http://localhost:8080/categories';
   // private upsertCategoryUrl = 'http://localhost:8080/category/';
-  private allCategoriesUrl = '/categories';
-  private upsertCategoryUrl = '/category/';
+  private allCategoriesUrl //= '/categories';
+  private upsertCategoryUrl //= '/category/';
 
   isAllCategoriesLoaded: boolean = false;
 
   constructor(private http: Http) {
+    if (environment.production) {
+      this.allCategoriesUrl = '/categories';
+      this.upsertCategoryUrl = '/category/';
+    }
+    else {
+      this.allCategoriesUrl = 'http://localhost:8080/categories';
+      this.upsertCategoryUrl = 'http://localhost:8080/category/';
+    }
   }
 
   getAllCategories(): Observable<any> {
@@ -31,8 +38,8 @@ export class CategoryService {
     console.log('Body is: \n' + JSON.stringify(category));
 
     return this.http
-      .post(this.upsertCategoryUrl + category.name, category, {headers: new Headers({'Content-Type': 'application/json'})} )
+      .post(this.upsertCategoryUrl + category.name, category, {headers: new Headers({'Content-Type': 'application/json'})})
       .map(res => res.toString())
-      .catch((error:any) => Observable.throw('Server error'));
+      .catch((error: any) => Observable.throw('Server error'));
   }
 }

@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http } from "@angular/http";
-
-import { Observable } from "rxjs";
-
-import { Match } from "../entities/match";
+import {Injectable} from '@angular/core';
+import {Headers, Http} from "@angular/http";
+import {Observable} from "rxjs";
+import {Match} from "../entities/match";
+import {environment} from 'app/../environments/environment';
 
 
 @Injectable()
@@ -13,11 +12,22 @@ export class MatchService {
   // private allMatchUrl = 'http://localhost:8080/allMatch/';
   // private matchChangeUrl = 'http://localhost:8080/match';
   // private matchDeleteUrl = 'http://localhost:8080/deleteMatch/';
-  private allMatchUrl = '/allMatch/';
-  private matchChangeUrl = '/match';
-  private matchDeleteUrl = '/deleteMatch/';
+  private allMatchUrl //= '/allMatch/';
+  private matchChangeUrl //= '/match';
+  private matchDeleteUrl //= '/deleteMatch/';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    if (environment.production) {
+      this.allMatchUrl = '/allMatch/';
+      this.matchChangeUrl = '/match';
+      this.matchDeleteUrl = '/deleteMatch/';
+    }
+    else {
+      this.allMatchUrl = 'http://localhost:8080/allMatch/';
+      this.matchChangeUrl = 'http://localhost:8080/match';
+      this.matchDeleteUrl = 'http://localhost:8080/deleteMatch/';
+    }
+  }
 
   allMatch: Match[];
   matchAmount: number;
